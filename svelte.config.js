@@ -13,6 +13,9 @@ const config = {
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
     adapter: adapter(),
     alias: {
+      "@organism/*": "./src/lib/components/organism/*",
+      "@molecules/*": "./src/lib/components/molecules/*",
+      "@atoms/*": "./src/lib/components/ui/*",
       "@/*": "./src/lib/*",
     }
   }
