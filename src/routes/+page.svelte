@@ -1,15 +1,15 @@
 <script>
 	import Avatar from '@atoms/avatar';
+	import { Button } from '@atoms/button';
+	import * as Card from '@atoms/card';
+	import { Input } from '@atoms/input';
+	import { Label } from '@atoms/label';
+	import * as Select from '@atoms/select';
 	import FormProvider from '@forms/FormProvider.svelte';
 	import FormRadio from '@forms/FormRadio.svelte';
 	import FormSelect from '@forms/FormSelect.svelte';
 	import FormTextInput from '@forms/FormTextInput.svelte';
 	import FormUpload from '@forms/FormUpload.svelte';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Card from '$lib/components/ui/card/index.js';
-	import * as Select from '$lib/components/ui/select/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { z } from 'zod';
 	const schema = z.object({
