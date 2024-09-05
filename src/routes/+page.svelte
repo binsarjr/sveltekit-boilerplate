@@ -1,4 +1,5 @@
 <script>
+	import Avatar from '@atoms/avatar';
 	import FormProvider from '@forms/FormProvider.svelte';
 	import FormRadio from '@forms/FormRadio.svelte';
 	import FormSelect from '@forms/FormSelect.svelte';
@@ -16,6 +17,10 @@
 </script>
 
 <div class="container">
+	<Avatar>
+		<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+		<Avatar.Fallback>CN</Avatar.Fallback>
+	</Avatar>
 	<FormProvider {form} debug>
 		<FormTextInput name="name" label="Name" placeholder="Enter your name" />
 		<FormTextInput name="angka" label="Angka" type="number" placeholder="Enter your angka" />
