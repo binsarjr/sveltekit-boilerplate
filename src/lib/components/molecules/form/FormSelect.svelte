@@ -1,10 +1,10 @@
 <script lang="ts">
-	import * as Select from '$lib/components/ui/select';
 	import { createId } from '@paralleldrive/cuid2';
 	import { formFieldProxy } from 'sveltekit-superforms';
 	import FormBase, { type FormBaseProps } from './FormBase.svelte';
 	import { getFormProvider } from './FormProvider.svelte';
 	import type { Options } from './types';
+	import * as Select from '@atoms/select';
 	const formProvider = getFormProvider();
 
 	type $$Props = FormBaseProps & {

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Input from '@/components/ui/input/input.svelte';
 	import { createId } from '@paralleldrive/cuid2';
 	import { formFieldProxy } from 'sveltekit-superforms';
 	import FormBase, { type FormBaseProps } from './FormBase.svelte';
 	import { getFormProvider } from './FormProvider.svelte';
+	import { Input } from '@atoms/input';
 
 	const formProvider = getFormProvider();
 

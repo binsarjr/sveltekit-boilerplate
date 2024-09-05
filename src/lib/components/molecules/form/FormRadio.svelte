@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Label } from '$lib/components/ui/label';
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import { createId } from '@paralleldrive/cuid2';
 	import { formFieldProxy } from 'sveltekit-superforms';
 	import { getFormProvider } from './FormProvider.svelte';
 	import type { Options } from './types';
+	import { Label } from '@atoms/label';
 
 	const formProvider = getFormProvider();
 	export let name: string;

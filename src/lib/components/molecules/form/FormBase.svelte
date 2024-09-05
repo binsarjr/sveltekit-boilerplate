@@ -11,7 +11,8 @@
 </script>
 
 <script lang="ts">
-	import Label from '@/components/ui/label/label.svelte';
+	import Label from '@atoms/label/label.svelte';
+
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	type $$Props = FormBaseProps & SuperFormProps;
