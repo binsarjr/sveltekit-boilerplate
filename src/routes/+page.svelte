@@ -1,13 +1,11 @@
 <script>
-	import FormTextInput from '@/components/molecules/form/FormTextInput.svelte';
-	import FormProvider from '@/components/molecules/form/FormProvider.svelte';
-	import FormSelect from '@/components/molecules/form/FormSelect.svelte';
-	import FormUpload from '@/components/molecules/form/FormUpload.svelte';
-	import { onMount } from 'svelte';
-	import { defaults, superForm } from 'sveltekit-superforms';
-	import { zod } from 'sveltekit-superforms/adapters';
+	import FormProvider from '@forms/FormProvider.svelte';
+	import FormRadio from '@forms/FormRadio.svelte';
+	import FormSelect from '@forms/FormSelect.svelte';
+	import FormTextInput from '@forms/FormTextInput.svelte';
+	import FormUpload from '@forms/FormUpload.svelte';
+	import { superForm } from 'sveltekit-superforms';
 	import { z } from 'zod';
-	import FormRadio from '@/components/molecules/form/FormRadio.svelte';
 	const schema = z.object({
 		name: z.string().min(2),
 		angka: z.number().min(5).optional(),

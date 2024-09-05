@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as RadioGroup from '$lib/components/ui/radio-group';
+	import * as RadioGroup from '@atoms/radio-group';
 	import { createId } from '@paralleldrive/cuid2';
 	import { formFieldProxy } from 'sveltekit-superforms';
 	import { getFormProvider } from './FormProvider.svelte';
