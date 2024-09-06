@@ -5,6 +5,7 @@
 	import { Input } from '@atoms/input';
 	import { Label } from '@atoms/label';
 	import * as Select from '@atoms/select';
+	import FormCombobox from '@forms/FormCombobox.svelte';
 	import FormProvider from '@forms/FormProvider.svelte';
 	import FormRadio from '@forms/FormRadio.svelte';
 	import FormSelect from '@forms/FormSelect.svelte';
@@ -58,6 +59,17 @@
 		<Avatar.Fallback>CN</Avatar.Fallback>
 	</Avatar>
 	<FormProvider {form} debug>
+		<FormCombobox
+			name="ok"
+			options={async () => {
+				await new Promise((r) => setTimeout(r, 1000));
+				return [
+					{ value: 'm@example.com', label: 'm@example.com' },
+					{ value: 'm@google.com', label: 'm@google.com' },
+					{ value: 'm@support.com', label: 'm@support.com' }
+				];
+			}}
+		/>
 		<FormTextInput name="name" label="Name" placeholder="Enter your name" />
 		<FormTextInput name="angka" label="Angka" type="number" placeholder="Enter your angka" />
 		<FormUpload multiple name="img" label="Angka" placeholder="Enter your angka" />

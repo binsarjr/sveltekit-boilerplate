@@ -18,7 +18,7 @@
 	export let options: $$Props['options'] = undefined;
 	export let selected: $$Props['selected'] = undefined;
 	export let multiple: $$Props['multiple'] = false;
-	let { value, errors, constraints } = formFieldProxy(formProvider, $$props.name);
+	let { value, errors, constraints } = formFieldProxy(formProvider, $$props.name || '');
 
 	{
 		// default value

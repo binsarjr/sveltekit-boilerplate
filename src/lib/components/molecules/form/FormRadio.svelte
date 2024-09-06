@@ -10,7 +10,7 @@
 	export let name: string;
 	export let options: Options;
 
-	const { constraints, value } = formFieldProxy(formProvider, name);
+	const { constraints, value } = formFieldProxy(formProvider, name || '');
 </script>
 
 <RadioGroup.Root bind:value={$value} {...$constraints}>

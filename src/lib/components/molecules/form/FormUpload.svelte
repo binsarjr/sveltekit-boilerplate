@@ -9,7 +9,7 @@
 
 	type $$Props = FormBaseProps;
 	export let multiple: $$Props['multiple'] = false;
-	const { errors, constraints } = formFieldProxy(formProvider, $$props.name);
+	const { errors, constraints } = formFieldProxy(formProvider, $$props.name || '');
 
 	const value_s = multiple
 		? filesProxy(formProvider, $$props.name)
