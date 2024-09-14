@@ -40,7 +40,7 @@
 			<IconChevronDown stroke={1} class="text-[18px]" />
 		</span>
 	</CollapsibleTrigger>
-	<CollapsibleContent class="collapsibleDropdown">
+	<CollapsibleContent>
 		<ul>
 			{#each sub as sublink}
 				<li class="my-1 ml-8">
