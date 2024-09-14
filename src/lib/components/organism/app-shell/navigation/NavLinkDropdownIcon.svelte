@@ -25,24 +25,32 @@
 	/* Open collapsible by default
 	 * if one of child element is active */
 	const isChildActive = !!sub?.find((s: any) => checkActiveNav(s.href));
+
+	let dropdownOpen = false;
 </script>
 
-<DropdownMenu>
-	<Tooltip>
-		<TooltipTrigger asChild>
-			<DropdownMenuTrigger asChild>
+<DropdownMenu bind:open={dropdownOpen}>
+	<Tooltip openDelay={0}>
+		<TooltipTrigger>
+			<DropdownMenuTrigger>
 				<Button variant={isChildActive ? 'secondary' : 'ghost'} size="icon" class="h-12 w-12">
 					<svelte:component this={icon} class="text-[18px]" />
 				</Button>
 			</DropdownMenuTrigger>
 		</TooltipTrigger>
-		<TooltipContent side="right" class="flex items-center gap-4">
-			{title}
-			{#if label}
-				<span class="ml-auto text-muted-foreground">{label}</span>
-			{/if}
-			<IconChevronDown class="-rotate-90 text-[18px] text-muted-foreground" />
-		</TooltipContent>
+		{#if !dropdownOpen}
+			<TooltipContent side="right">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<div class="flex cursor-pointer items-center gap-4" on:click={() => (dropdownOpen = true)}>
+					{title}
+					{#if label}
+						<span class="ml-auto text-muted-foreground">{label}</span>
+					{/if}
+					<IconChevronDown class="-rotate-90 text-[18px] text-muted-foreground" />
+				</div>
+			</TooltipContent>
+		{/if}
 	</Tooltip>
 	<DropdownMenuContent side="right" align="start" sideOffset={4}>
 		<DropdownMenuLabel>
@@ -51,14 +59,19 @@
 		</DropdownMenuLabel>
 		<DropdownMenuSeparator />
 		{#each sub as { title, icon, label, href }}
-			<DropdownMenuItem asChild>
-				<a {href} class={cn(checkActiveNav(href) ? 'bg-secondary' : '')}>
+			<DropdownMenuItem>
+				<Button
+					variant="ghost"
+					size="sm"
+					{href}
+					class={cn(checkActiveNav(href) ? 'bg-secondary' : '')}
+				>
 					<svelte:component this={icon} class="text-[18px]" />
 					<span class="ml-2 max-w-52 text-wrap">{title}</span>
 					{#if label}
 						<span class="ml-auto text-xs">{label}</span>
 					{/if}
-				</a>
+				</Button>
 			</DropdownMenuItem>
 		{/each}
 	</DropdownMenuContent>

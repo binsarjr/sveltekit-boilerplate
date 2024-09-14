@@ -13,8 +13,8 @@
 	export let href;
 </script>
 
-<Tooltip>
-	<TooltipTrigger asChild>
+<Tooltip openDelay={0}>
+	<TooltipTrigger>
 		<a
 			{href}
 			class={cn(
@@ -25,7 +25,7 @@
 				'h-12 w-12'
 			)}
 		>
-			<svelte:component this={icon} />
+			<svelte:component this={icon} class="text-[18px]" />
 			<span class="sr-only">{title}</span>
 		</a>
 	</TooltipTrigger>

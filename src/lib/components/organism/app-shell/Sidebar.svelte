@@ -17,6 +17,7 @@
 	import IconMenu from '@/components/icons/IconMenu.svelte';
 	import IconX from '@/components/icons/IconX.svelte';
 	import Nav from './navigation/Nav.svelte';
+	import IconChevronsLeft from '@icons/IconChevronsLeft.svelte';
 
 	const navCondition = async () => {
 		if (!browser) return;
@@ -189,7 +190,8 @@
 
 	<Layout fixed class={$navOpened ? 'h-svh' : ''}>
 		<LayoutHeader sticky class="z-50 flex justify-between px-4 py-3 shadow-sm md:px-4">
-			<div class={`flex items-center ${!isCollapsed ? 'gap-2' : ''}`}>
+			<div class={`flex items-center ${!$isCollapsed ? 'gap-2' : ''}`}>
+				<div class={`transition-all ${$isCollapsed ? 'h-6 w-6' : 'h-8 w-8'}`}>SA</div>
 				<div
 					class={`flex flex-col justify-end truncate ${$isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
 				>
@@ -217,12 +219,23 @@
 		</LayoutHeader>
 
 		<!-- Navigation Links -->
+
 		<Nav
 			id="sidebar-menu"
 			class={`z-40 h-full flex-1 overflow-auto ${$navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
 			closeNav={() => ($navOpened = false)}
-			isCollapsed={$isCollapsed}
+			bind:isCollapsed={$isCollapsed}
 			links={sidelinks}
 		/>
+
+		<!-- Scrollbar width toggle button -->
+		<Button
+			on:click={() => ($isCollapsed = !$isCollapsed)}
+			size="icon"
+			variant="outline"
+			class="absolute -right-5 top-1/2 z-50 hidden rounded-full md:inline-flex"
+		>
+			<IconChevronsLeft stroke={1.5} class={`h-5 w-5 ${$isCollapsed ? 'rotate-180' : ''}`} />
+		</Button>
 	</Layout>
 </aside>
