@@ -35,7 +35,139 @@
 		{
 			title: 'Dashboard',
 			label: '',
-			href: '/',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Tasks',
+			label: '3',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Chats',
+			label: '9',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Apps',
+			label: '',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Authentication',
+			label: '',
+			href: '#',
+			icon: IconMenu,
+			sub: [
+				{
+					title: 'Sign In (email + password)',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Sign In (Box)',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Sign Up',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Forgot Password',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'OTP',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				}
+			]
+		},
+		{
+			title: 'Users',
+			label: '',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Requests',
+			label: '10',
+			href: '#',
+			icon: IconMenu,
+			sub: [
+				{
+					title: 'Trucks',
+					label: '9',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Cargos',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				}
+			]
+		},
+		{
+			title: 'Analysis',
+			label: '',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Extra Components',
+			label: '',
+			href: '#',
+			icon: IconMenu
+		},
+		{
+			title: 'Error Pages',
+			label: '',
+			href: '#',
+			icon: IconMenu,
+			sub: [
+				{
+					title: 'Not Found',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Internal Server Error',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Maintenance Error',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				},
+				{
+					title: 'Unauthorised Error',
+					label: '',
+					href: '#',
+					icon: IconMenu
+				}
+			]
+		},
+		{
+			title: 'Settings',
+			label: '',
+			href: '#',
 			icon: IconMenu
 		}
 	];

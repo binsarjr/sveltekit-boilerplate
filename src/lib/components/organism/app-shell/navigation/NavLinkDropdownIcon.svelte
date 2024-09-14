@@ -19,6 +19,7 @@
 	export let title;
 	export let icon;
 	export let label;
+
 	export let sub;
 
 	/* Open collapsible by default
@@ -31,7 +32,7 @@
 		<TooltipTrigger asChild>
 			<DropdownMenuTrigger asChild>
 				<Button variant={isChildActive ? 'secondary' : 'ghost'} size="icon" class="h-12 w-12">
-					{@html icon}
+					<svelte:component this={icon} class="text-[18px]" />
 				</Button>
 			</DropdownMenuTrigger>
 		</TooltipTrigger>
@@ -40,7 +41,7 @@
 			{#if label}
 				<span class="ml-auto text-muted-foreground">{label}</span>
 			{/if}
-			<IconChevronDown size={18} class="-rotate-90 text-muted-foreground" />
+			<IconChevronDown class="-rotate-90 text-[18px] text-muted-foreground" />
 		</TooltipContent>
 	</Tooltip>
 	<DropdownMenuContent side="right" align="start" sideOffset={4}>
@@ -52,7 +53,8 @@
 		{#each sub as { title, icon, label, href }}
 			<DropdownMenuItem asChild>
 				<a {href} class={cn(checkActiveNav(href) ? 'bg-secondary' : '')}>
-					{@html icon} <span class="ml-2 max-w-52 text-wrap">{title}</span>
+					<svelte:component this={icon} class="text-[18px]" />
+					<span class="ml-2 max-w-52 text-wrap">{title}</span>
 					{#if label}
 						<span class="ml-auto text-xs">{label}</span>
 					{/if}

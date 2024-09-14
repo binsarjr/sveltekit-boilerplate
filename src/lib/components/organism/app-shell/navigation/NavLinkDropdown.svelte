@@ -4,8 +4,9 @@
 	import { page } from '$app/stores';
 	import NavLink from './NavLink.svelte';
 	import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@atoms/collapsible';
-	import ChevronDownIcon from '@/components/icons/IconChevronDown.svelte';
 	import IconChevronDown from '@/components/icons/IconChevronDown.svelte';
+	import { buttonVariants } from '@atoms/button';
+	import { slide } from 'svelte/transition';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 
@@ -19,8 +20,16 @@
 </script>
 
 <Collapsible open={isChildActive}>
-	<CollapsibleTrigger class={cn('group h-12 w-full justify-start rounded-none px-6', 'secondary')}>
-		<div class="mr-2">{@html icon}</div>
+	<CollapsibleTrigger
+		class={cn(
+			buttonVariants({ variant: 'ghost', size: 'sm' }),
+			'group h-12 w-full justify-start rounded-none px-6',
+			'secondary'
+		)}
+	>
+		<div class="mr-2">
+			<svelte:component this={icon} class="text-[18px]" />
+		</div>
 		{title}
 		{#if label}
 			<div class="ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground">
@@ -28,7 +37,7 @@
 			</div>
 		{/if}
 		<span class={cn('ml-auto transition-all group-data-[state="open"]:-rotate-180')}>
-			<IconChevronDown stroke={1} />
+			<IconChevronDown stroke={1} class="text-[18px]" />
 		</span>
 	</CollapsibleTrigger>
 	<CollapsibleContent class="collapsibleDropdown" asChild>

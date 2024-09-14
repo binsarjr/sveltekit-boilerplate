@@ -3,6 +3,7 @@
 	import { initCheckActiveNav } from './Nav.svelte';
 	import { page } from '$app/stores';
 	import { TooltipContent, TooltipTrigger, Tooltip } from '@atoms/tooltip';
+	import { buttonVariants } from '@atoms/button';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 
@@ -14,7 +15,16 @@
 
 <Tooltip>
 	<TooltipTrigger asChild>
-		<a {href} class={cn(checkActiveNav(href) ? 'secondary' : 'ghost', 'h-12 w-12')}>
+		<a
+			{href}
+			class={cn(
+				buttonVariants({
+					variant: checkActiveNav(href) ? 'secondary' : 'ghost',
+					size: 'icon'
+				}),
+				'h-12 w-12'
+			)}
+		>
 			<svelte:component this={icon} />
 			<span class="sr-only">{title}</span>
 		</a>
