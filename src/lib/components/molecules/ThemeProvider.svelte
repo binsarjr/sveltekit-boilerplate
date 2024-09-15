@@ -4,20 +4,28 @@
 
 	type Theme = 'dark' | 'light' | 'system';
 
-	const STORAGE_KEY = 'vite-ui-theme';
+	export const STORAGE_KEY = 'vite-ui-theme';
 	const DEFAULT_THEME: Theme = 'system';
 
 	function createThemeStore() {
 		const { subscribe, set } = writable<Theme>(
-			(browser && (localStorage.getItem(STORAGE_KEY) as Theme)) || DEFAULT_THEME
+			(browser &&
+				((document.cookie
+					.split('; ')
+					.find((row) => row.startsWith(STORAGE_KEY))
+					?.split('=')[1] as Theme) ||
+					(localStorage.getItem(STORAGE_KEY) as Theme))) ||
+				DEFAULT_THEME
 		);
 
 		return {
 			subscribe,
-			set,
-			setTheme: (newTheme: Theme) => {
+			set: (newTheme: Theme) => {
 				if (browser) {
 					localStorage.setItem(STORAGE_KEY, newTheme);
+					// Menyimpan tema dalam cookie juga
+					const maxAge = 365 * 24 * 60 * 60; // Satu tahun dalam detik
+					document.cookie = `${STORAGE_KEY}=${newTheme}; path=/; max-age=${maxAge}; SameSite=Strict`;
 				}
 				set(newTheme);
 			}
