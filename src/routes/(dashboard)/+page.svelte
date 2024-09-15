@@ -8,9 +8,10 @@
 	import { Button } from '@atoms/button';
 	import Search from '@molecules/Search.svelte';
 	import ThemeSwitch from '@molecules/ThemeSwitch.svelte';
-	import TopNav from '../@components/TopNav.svelte';
+	import TopNav from './@components/TopNav.svelte';
+	import UserNav from './@components/UserNav.svelte';
 	import RecentSales from './@components/RecentSales.svelte';
-	import UserNav from '../@components/UserNav.svelte';
+	import { route } from '@/ROUTES';
 
 	const topNav = [
 		{
@@ -30,7 +31,7 @@
 		},
 		{
 			title: 'Settings',
-			href: 'dashboard/settings',
+			href: route('/settings'),
 			isActive: false
 		}
 	];
