@@ -8,9 +8,9 @@
 	import { Button } from '@atoms/button';
 	import Search from '@molecules/Search.svelte';
 	import ThemeSwitch from '@molecules/ThemeSwitch.svelte';
-	import TopNav from '@molecules/TopNav.svelte';
-	import UserNav from '@molecules/UserNav.svelte';
-	import RecentSales from '@molecules/RecentSales.svelte';
+	import TopNav from '../@components/TopNav.svelte';
+	import RecentSales from './@components/RecentSales.svelte';
+	import UserNav from '../@components/UserNav.svelte';
 
 	const topNav = [
 		{
@@ -159,9 +159,7 @@
 						<CardHeader>
 							<CardTitle>Overview</CardTitle>
 						</CardHeader>
-						<CardContent class="pl-2">
-							<!-- <Overview /> -->
-						</CardContent>
+						<CardContent class="pl-2"></CardContent>
 					</Card>
 					<Card class="col-span-1 lg:col-span-3">
 						<CardHeader>

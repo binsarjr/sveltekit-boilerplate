@@ -2,12 +2,12 @@
 	import Separator from '@atoms/separator/separator.svelte';
 	import IconMenu from '@icons/IconMenu.svelte';
 	import Search from '@molecules/Search.svelte';
-	import SidebarNav from '@molecules/SidebarNav.svelte';
+	import SidebarNav from './@components/SidebarNav.svelte';
 	import ThemeSwitch from '@molecules/ThemeSwitch.svelte';
-	import UserNav from '@molecules/UserNav.svelte';
 	import Layout from '@organism/layout/Layout.svelte';
 	import LayoutBody from '@organism/layout/LayoutBody.svelte';
 	import LayoutHeader from '@organism/layout/LayoutHeader.svelte';
+	import UserNav from '../@components/UserNav.svelte';
 
 	const sidebarNavItems = [
 		{
