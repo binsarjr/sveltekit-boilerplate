@@ -19,14 +19,14 @@
 
 <section
 	data-layout="header"
+	{...$$restProps}
 	class={cn(
-		`z-10 flex h-[var(--header-height)] items-center gap-4 bg-background p-4 md:px-8`,
+		'z-10 flex h-[var(--header-height)] items-center gap-4 bg-background p-4 md:px-8',
 		$layoutContext.offset > 10 && sticky ? 'shadow' : 'shadow-none',
 		$layoutContext.fixed && 'flex-none',
 		sticky && 'sticky top-0',
 		$$props.class
 	)}
-	{...$$restProps}
 >
 	<slot />
 </section>
