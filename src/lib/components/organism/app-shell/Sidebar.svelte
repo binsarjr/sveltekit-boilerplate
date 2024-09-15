@@ -18,6 +18,7 @@
 	import IconX from '@/components/icons/IconX.svelte';
 	import Nav from './navigation/Nav.svelte';
 	import IconChevronsLeft from '@icons/IconChevronsLeft.svelte';
+	import { route } from '@/ROUTES';
 
 	const navCondition = async () => {
 		if (!browser) return;
@@ -168,7 +169,7 @@
 		{
 			title: 'Settings',
 			label: '',
-			href: '#',
+			href: route('/settings'),
 			icon: IconMenu
 		}
 	];

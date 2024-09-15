@@ -3,5 +3,5 @@
 	import '../app.css';
 </script>
 
-<ThemeProvider />
+<!-- <ThemeProvider /> -->
 <slot></slot>

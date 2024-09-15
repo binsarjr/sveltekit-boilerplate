@@ -10,7 +10,13 @@
  */
 const PAGES = {
 	'/': `/`,
-	'/dashboard': `/dashboard`
+	'/dashboard': `/dashboard`,
+	'/settings': `/settings`,
+	'/settings/account': `/settings/account`,
+	'/settings/appearance': `/settings/appearance`,
+	'/settings/display': `/settings/display`,
+	'/settings/error-example': `/settings/error-example`,
+	'/settings/notifications': `/settings/notifications`
 };
 
 /**
@@ -133,7 +139,16 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
  * ```
  */
 export type KIT_ROUTES = {
-	PAGES: { '/': never; '/dashboard': never };
+	PAGES: {
+		'/': never;
+		'/dashboard': never;
+		'/settings': never;
+		'/settings/account': never;
+		'/settings/appearance': never;
+		'/settings/display': never;
+		'/settings/error-example': never;
+		'/settings/notifications': never;
+	};
 	SERVERS: Record<string, never>;
 	ACTIONS: Record<string, never>;
 	LINKS: Record<string, never>;
