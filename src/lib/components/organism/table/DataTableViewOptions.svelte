@@ -28,7 +28,7 @@
 		.map(([id]) => id);
 </script>
 
-<DropdownMenu>
+<DropdownMenu closeOnItemClick={false}>
 	<DropdownMenuTrigger>
 		<Button variant="outline" size="sm" class="ml-auto hidden h-8 lg:flex">
 			<IconMixerHorizontal />
