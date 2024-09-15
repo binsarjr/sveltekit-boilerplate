@@ -143,25 +143,25 @@
 				{
 					title: 'Not Found',
 					label: '',
-					href: '#',
+					href: route('/error-pages/not-found'),
 					icon: IconMenu
 				},
 				{
 					title: 'Internal Server Error',
 					label: '',
-					href: '#',
+					href: route('/error-pages/internal-error'),
 					icon: IconMenu
 				},
 				{
 					title: 'Maintenance Error',
 					label: '',
-					href: '#',
+					href: route('/error-pages/maintenance'),
 					icon: IconMenu
 				},
 				{
 					title: 'Unauthorised Error',
 					label: '',
-					href: '#',
+					href: route('/error-pages/unauthorised'),
 					icon: IconMenu
 				}
 			]

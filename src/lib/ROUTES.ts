@@ -15,7 +15,11 @@ const PAGES = {
 	'/settings/appearance': `/settings/appearance`,
 	'/settings/display': `/settings/display`,
 	'/settings/error-example': `/settings/error-example`,
-	'/settings/notifications': `/settings/notifications`
+	'/settings/notifications': `/settings/notifications`,
+	'/error-pages/internal-error': `/error-pages/internal-error`,
+	'/error-pages/maintenance': `/error-pages/maintenance`,
+	'/error-pages/not-found': `/error-pages/not-found`,
+	'/error-pages/unauthorised': `/error-pages/unauthorised`
 };
 
 /**
@@ -146,6 +150,10 @@ export type KIT_ROUTES = {
 		'/settings/display': never;
 		'/settings/error-example': never;
 		'/settings/notifications': never;
+		'/error-pages/internal-error': never;
+		'/error-pages/maintenance': never;
+		'/error-pages/not-found': never;
+		'/error-pages/unauthorised': never;
 	};
 	SERVERS: Record<string, never>;
 	ACTIONS: Record<string, never>;
