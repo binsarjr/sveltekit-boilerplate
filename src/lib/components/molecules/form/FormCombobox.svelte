@@ -105,7 +105,6 @@
 	}
 
 	const onSelect = (value: string) => {
-		console.log(value);
 		$value = value;
 		return (triggerId: string) => closeAndFocusTrigger(triggerId);
 	};

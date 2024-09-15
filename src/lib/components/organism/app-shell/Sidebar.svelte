@@ -43,7 +43,7 @@
 		{
 			title: 'Tasks',
 			label: '3',
-			href: '#',
+			href: route('/tasks'),
 			icon: IconMenu
 		},
 		{
