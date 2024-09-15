@@ -4,8 +4,8 @@
 	import IconSun from '@icons/IconSun.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { theme } from './ThemeProvider.svelte';
 
-	const theme = writable<'light' | 'dark'>('light');
 	function toggleTheme() {
 		$theme = $theme === 'light' ? 'dark' : 'light';
 	}
