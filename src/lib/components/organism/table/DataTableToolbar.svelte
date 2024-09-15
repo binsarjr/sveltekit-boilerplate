@@ -2,6 +2,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import DataTableViewOptions from './DataTableViewOptions.svelte';
+	import DataTableFilter from './DataTableFilter.svelte';
 </script>
 
 <div class="flex items-center justify-between">
@@ -10,6 +11,14 @@
 	>
 		<Input placeholder="Filter tasks..." class="h-8 w-[150px] lg:w-[250px]" />
 		<div class="flex gap-x-2">
+			<DataTableFilter
+				title="Status"
+				options={[
+					{ value: 'open', label: 'Open' },
+					{ value: 'closed', label: 'Closed' },
+					{ value: 'all', label: 'All' }
+				]}
+			/>
 			<!-- {#if table.getColumn('status')}
         <DataTableFacetedFilter
           column={table.getColumn('status')}

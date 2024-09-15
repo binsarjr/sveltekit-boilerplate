@@ -10,6 +10,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import IconMixerHorizontal from '$lib/components/icons/IconMixerHorizontal.svelte';
 	import { getPluginStateContext, getTableContext } from './DataTable.svelte';
+	import { tick } from 'svelte';
 
 	const table = getTableContext();
 	const { flatColumns, pluginStates } = table;
@@ -17,8 +18,13 @@
 
 	const ids = flatColumns.map((c) => c.id);
 	let showForId = Object.fromEntries(ids.map((id) => [id, true]));
-	function handleToggle(id: string) {
+	async function handleToggle(id: string) {
 		const trueCount = Object.values(showForId).filter(Boolean).length;
+		if (trueCount == 1) {
+			await tick();
+			showForId[id] = true;
+			return;
+		}
 		if (trueCount > 1 || !showForId[id]) {
 			showForId[id] = !showForId[id];
 		}
