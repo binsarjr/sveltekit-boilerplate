@@ -4,7 +4,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 const handleThemeProvider: Handle = async ({ event, resolve }) => {
 	const theme = event.cookies.get(STORAGE_KEY);
-	console.log(theme);
 
 	if (!theme) {
 		return await resolve(event);
