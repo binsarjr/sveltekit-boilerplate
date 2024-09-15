@@ -18,6 +18,7 @@ const config = {
 			'@molecules/*': './src/lib/components/molecules/*',
 			'@atoms/*': './src/lib/components/ui/*',
 			'@icons/*': './src/lib/components/icons/*',
+			'@templates/*': './src/lib/components/templates/*',
 			'@/*': './src/lib/*'
 		}
 	}

@@ -10,8 +10,6 @@
 </script>
 
 <div class="relative h-full overflow-hidden bg-background">
-	<!-- <SkipToMain />
-  <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} /> -->
 	<Sidebar />
 	<main
 		id="content"
