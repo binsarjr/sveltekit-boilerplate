@@ -17,6 +17,12 @@
 
 	const ids = flatColumns.map((c) => c.id);
 	let showForId = Object.fromEntries(ids.map((id) => [id, true]));
+	function handleToggle(id: string) {
+		const trueCount = Object.values(showForId).filter(Boolean).length;
+		if (trueCount > 1 || !showForId[id]) {
+			showForId[id] = !showForId[id];
+		}
+	}
 	$: $hiddenColumnIds = Object.entries(showForId)
 		.filter(([, show]) => !show)
 		.map(([id]) => id);
@@ -33,7 +39,11 @@
 		<DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
 		<DropdownMenuSeparator />
 		{#each ids as id}
-			<DropdownMenuCheckboxItem class="capitalize" bind:checked={showForId[id]}>
+			<DropdownMenuCheckboxItem
+				class="capitalize"
+				checked={showForId[id]}
+				onCheckedChange={() => handleToggle(id)}
+			>
 				{id}
 			</DropdownMenuCheckboxItem>
 		{/each}

@@ -35,8 +35,13 @@
 
 	const headers: DatatableColumnDefinition<Task> = [
 		{
-			header: 'ID',
-			accessor: 'id'
+			header: 'GROUP',
+			columns: [
+				{
+					header: 'ID',
+					accessor: 'id'
+				}
+			]
 		},
 		{
 			header: 'Title',
