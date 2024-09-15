@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
-	import { addSortBy, addHiddenColumns } from 'svelte-headless-table/plugins';
+	import { addSortBy, addHiddenColumns, type PluginStates } from 'svelte-headless-table/plugins';
 	const defaultPlugin = {
-		sort: addSortBy<any>({})
-		// hide: addHiddenColumns<any>()
+		sort: addSortBy<any>({}),
+		hide: addHiddenColumns<any>()
 	};
 	export type DefaultPlugin = typeof defaultPlugin;
 
@@ -23,11 +23,23 @@
 				columns: DatatableColumn<Data>[];
 		  })
 	)[];
+
+	export const setTableContext = (table: TableViewModel<any, DefaultPlugin>) =>
+		setContext('__table_provider__', table);
+
+	export const getTableContext = () =>
+		getContext<TableViewModel<any, DefaultPlugin>>('__table_provider__');
+
+	export const setPluginStateContext = (pluginState: PluginStates<DefaultPlugin>) =>
+		setContext('__plugin_state_provider__', pluginState);
+
+	export const getPluginStateContext = () =>
+		getContext<PluginStates<DefaultPlugin>>('__plugin_state_provider__');
 </script>
 
 <script lang="ts" generics="Data">
 	import type { DeleteProps } from 'lucide-svelte/icons/delete';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext, setContext } from 'svelte';
 
 	import DataTableHeadCell from './DataTableHeadCell.svelte';
 
@@ -54,9 +66,11 @@
 		type DataColumnInitIdAndKey,
 		type DataColumnInit,
 		type GroupColumnInit,
-		type DataLabel
+		type DataLabel,
+		type TableViewModel
 	} from 'svelte-headless-table';
 	import TableBody from '@atoms/table/table-body.svelte';
+	import DataTableToolbar from './DataTableToolbar.svelte';
 
 	export let data: Writable<Data[]>;
 	export let columns: DatatableColumnDefinition<Data>;
@@ -86,8 +100,12 @@
 
 	const columnModelViews = table.createColumns(prepareColumns);
 
-	const { headerRows, pluginStates, rows, tableAttrs, tableBodyAttrs, tableHeadAttrs } =
-		table.createViewModel(columnModelViews);
+	const modelView = table.createViewModel(columnModelViews);
+	setTableContext(modelView);
+
+	const { headerRows, pluginStates, rows, tableAttrs, tableBodyAttrs, tableHeadAttrs } = modelView;
+
+	setPluginStateContext(pluginStates);
 
 	const dispatch = createEventDispatcher();
 
@@ -98,33 +116,35 @@
 </script>
 
 <div class="space-y-4">
-	<Table class="rounded-md border" {...$tableAttrs}>
-		<TableCaption>halo</TableCaption>
-		<TableHeader {...$tableHeadAttrs}>
-			{#each $headerRows as headerRow (headerRow.id)}
-				<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
-					<TableRow {...rowAttrs}>
-						{#each headerRow.cells as cell (cell.id)}
-							<DataTableHeadCell {cell} />
-						{/each}
-					</TableRow>
-				</Subscribe>
-			{/each}
-		</TableHeader>
-		<TableBody {...$tableBodyAttrs}>
-			{#each $rows as row (row.id)}
-				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-					<TableRow {...rowAttrs}>
-						{#each row.cells as cell (cell.id)}
-							<Subscribe attrs={cell.attrs()} let:attrs>
-								<TableCell {...attrs}>
-									<Render of={cell.render()} />
-								</TableCell>
-							</Subscribe>
-						{/each}
-					</TableRow>
-				</Subscribe>
-			{/each}
-		</TableBody>
-	</Table>
+	<DataTableToolbar />
+	<div class="rounded-md border">
+		<Table {...$tableAttrs}>
+			<TableHeader {...$tableHeadAttrs}>
+				{#each $headerRows as headerRow (headerRow.id)}
+					<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
+						<TableRow {...rowAttrs}>
+							{#each headerRow.cells as cell (cell.id)}
+								<DataTableHeadCell {cell} />
+							{/each}
+						</TableRow>
+					</Subscribe>
+				{/each}
+			</TableHeader>
+			<TableBody {...$tableBodyAttrs}>
+				{#each $rows as row (row.id)}
+					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+						<TableRow {...rowAttrs}>
+							{#each row.cells as cell (cell.id)}
+								<Subscribe attrs={cell.attrs()} let:attrs>
+									<TableCell {...attrs}>
+										<Render of={cell.render()} />
+									</TableCell>
+								</Subscribe>
+							{/each}
+						</TableRow>
+					</Subscribe>
+				{/each}
+			</TableBody>
+		</Table>
+	</div>
 </div>
