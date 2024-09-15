@@ -16,6 +16,7 @@ const PAGES = {
 	'/settings/display': `/settings/display`,
 	'/settings/error-example': `/settings/error-example`,
 	'/settings/notifications': `/settings/notifications`,
+	'/tasks': `/tasks`,
 	'/error-pages/internal-error': `/error-pages/internal-error`,
 	'/error-pages/maintenance': `/error-pages/maintenance`,
 	'/error-pages/not-found': `/error-pages/not-found`,
@@ -150,6 +151,7 @@ export type KIT_ROUTES = {
 		'/settings/display': never;
 		'/settings/error-example': never;
 		'/settings/notifications': never;
+		'/tasks': never;
 		'/error-pages/internal-error': never;
 		'/error-pages/maintenance': never;
 		'/error-pages/not-found': never;
