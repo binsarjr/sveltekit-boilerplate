@@ -8,9 +8,6 @@ dependencies:
   '@internationalized/date':
     specifier: ^3.5.5
     version: 3.5.5
-  '@tabler/icons-svelte':
-    specifier: ^3.17.0
-    version: 3.17.0(svelte@4.2.19)
   bits-ui:
     specifier: ^0.21.13
     version: 0.21.13(svelte@4.2.19)
@@ -1120,19 +1117,6 @@ packages:
     resolution: {integrity: sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==}
     dependencies:
       tslib: 2.7.0
-    dev: false
-
-  /@tabler/icons-svelte@3.17.0(svelte@4.2.19):
-    resolution: {integrity: sha512-62amAw4RQk2z3jG0Q5nq2HBnkpYIyMqGo4LVKt86hdZpNbdSyXsCfaMRhvoVSmNQHVFf9+DVcVyzUnfArkOzxw==}
-    peerDependencies:
-      svelte: '>=3 <6 || >=5.0.0-next.0'
-    dependencies:
-      '@tabler/icons': 3.17.0
-      svelte: 4.2.19
-    dev: false
-
-  /@tabler/icons@3.17.0:
-    resolution: {integrity: sha512-sCSfAQ0w93KSnSL7tS08n73CdIKpuHP8foeLMWgDKiZaCs8ZE//N3ytazCk651ZtruTtByI3b+ZDj7nRf+hHvA==}
     dev: false
 
   /@tailwindcss/typography@0.5.15(tailwindcss@3.4.11):

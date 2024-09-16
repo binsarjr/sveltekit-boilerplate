@@ -4,7 +4,7 @@
 	import DataTableViewOptions from './DataTableViewOptions.svelte';
 	import DataTableFilter from './DataTableFilter.svelte';
 	import { getTableContext, getTableOptionsContext } from './DataTable.svelte';
-	import { IconX } from '@tabler/icons-svelte';
+	import { X } from 'lucide-svelte';
 
 	const table = getTableContext();
 	const { flatColumns, pluginStates } = table;
@@ -45,7 +45,7 @@
 		{#if isFiltered}
 			<Button variant="ghost" class="h-8 px-2 lg:px-3" on:click={resetFilters}>
 				Reset
-				<IconX class="ml-2 h-4 w-4" />
+				<X class="ml-2 h-4 w-4" />
 			</Button>
 		{/if}
 	</div>
