@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -111,3 +111,32 @@ export function getNestedValue(obj: Record<string, any>, path: string) {
 	return result;
 }
 
+/**
+ * Membuat fungsi yang akan menjalankan fungsi yang diberikan dengan jeda waktu tertentu.
+ * Fungsi ini mirip dengan fungsi debounce di lodash.
+ *
+ * @param func - Fungsi yang akan dijalankan setelah jeda waktu
+ * @param wait - Waktu jeda dalam milidetik
+ * @returns Fungsi yang telah di-debounce
+ */
+export function debounce<T extends (...args: any[]) => any>(
+	func: T,
+	wait: number
+): (...args: Parameters<T>) => void {
+	let timeout: ReturnType<typeof setTimeout> | null = null;
+
+	return function (this: any, ...args: Parameters<T>) {
+		const context = this;
+
+		const later = () => {
+			timeout = null;
+			func.apply(context, args);
+		};
+
+		if (timeout !== null) {
+			clearTimeout(timeout);
+		}
+
+		timeout = setTimeout(later, wait);
+	};
+}
