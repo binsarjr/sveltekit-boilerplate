@@ -9,10 +9,10 @@
 		DropdownMenuShortcut,
 		DropdownMenuTrigger
 	} from '@/components/ui/dropdown-menu';
-	import Avatar from '@atoms/avatar';
-	import AvatarFallback from '@atoms/avatar/avatar-fallback.svelte';
-	import AvatarImage from '@atoms/avatar/avatar-image.svelte';
-	import { Button } from '@atoms/button';
+	import Avatar from '@shadcn-ui/avatar';
+	import AvatarFallback from '@shadcn-ui/avatar/avatar-fallback.svelte';
+	import AvatarImage from '@shadcn-ui/avatar/avatar-image.svelte';
+	import { Button } from '@shadcn-ui/button';
 </script>
 
 <DropdownMenu>

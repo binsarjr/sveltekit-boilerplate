@@ -3,7 +3,7 @@
 	import { fileProxy, filesProxy, formFieldProxy } from 'sveltekit-superforms';
 	import FormBase, { type FormBaseProps } from './FormBase.svelte';
 	import { getFormProvider } from './FormProvider.svelte';
-	import { Input } from '@atoms/input';
+	import { Input } from '@shadcn-ui/input';
 
 	const formProvider = getFormProvider();
 

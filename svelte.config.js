@@ -16,7 +16,8 @@ const config = {
 			'@forms/*': './src/lib/components/molecules/form/*',
 			'@organism/*': './src/lib/components/organism/*',
 			'@molecules/*': './src/lib/components/molecules/*',
-			'@atoms/*': './src/lib/components/ui/*',
+			'@atoms/*': './src/lib/components/atoms/*',
+			'@shadcn-ui/*': './src/lib/components/ui/*',
 			'@icons/*': './src/lib/components/icons/*',
 			'@templates/*': './src/lib/components/templates/*',
 			'@/*': './src/lib/*'

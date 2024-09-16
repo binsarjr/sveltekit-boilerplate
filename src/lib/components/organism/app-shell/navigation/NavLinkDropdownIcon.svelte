@@ -2,7 +2,7 @@
 	import { cn } from '@/utils';
 	import { initCheckActiveNav } from './Nav.svelte';
 	import { page } from '$app/stores';
-	import { Tooltip, TooltipContent, TooltipTrigger } from '@atoms/tooltip';
+	import { Tooltip, TooltipContent, TooltipTrigger } from '@shadcn-ui/tooltip';
 	import {
 		DropdownMenu,
 		DropdownMenuContent,
@@ -10,9 +10,9 @@
 		DropdownMenuLabel,
 		DropdownMenuSeparator,
 		DropdownMenuTrigger
-	} from '@atoms/dropdown-menu';
+	} from '@shadcn-ui/dropdown-menu';
 	import IconChevronDown from '@icons/IconChevronDown.svelte';
-	import Button from '@atoms/button/button.svelte';
+	import Button from '@shadcn-ui/button/button.svelte';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 

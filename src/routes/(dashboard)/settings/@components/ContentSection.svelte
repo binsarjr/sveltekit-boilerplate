@@ -1,5 +1,5 @@
 <script>
-	import { Separator } from '@atoms/separator';
+	import { Separator } from '@shadcn-ui/separator';
 
 	export let title;
 	export let desc;

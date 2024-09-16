@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { cn } from '$lib/utils.js';
-	import { Button } from '@atoms/button';
-	import * as Command from '@atoms/command';
-	import * as Popover from '@atoms/popover';
+	import { Button } from '@shadcn-ui/button';
+	import * as Command from '@shadcn-ui/command';
+	import * as Popover from '@shadcn-ui/popover';
 	import { createId } from '@paralleldrive/cuid2';
 	import Check from 'lucide-svelte/icons/check';
 	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';

@@ -9,7 +9,7 @@
 	import { cn } from '@/utils';
 	import { initCheckActiveNav } from './Nav.svelte';
 	import { page } from '$app/stores';
-	import { buttonVariants } from '@atoms/button';
+	import { buttonVariants } from '@shadcn-ui/button';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 

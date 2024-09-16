@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Avatar from '@atoms/avatar';
-	import AvatarFallback from '@atoms/avatar/avatar-fallback.svelte';
-	import AvatarImage from '@atoms/avatar/avatar-image.svelte';
+	import Avatar from '@shadcn-ui/avatar';
+	import AvatarFallback from '@shadcn-ui/avatar/avatar-fallback.svelte';
+	import AvatarImage from '@shadcn-ui/avatar/avatar-image.svelte';
 </script>
 
 <div class="space-y-8">

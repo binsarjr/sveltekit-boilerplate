@@ -1,5 +1,5 @@
 <script>
-	import Separator from '@atoms/separator/separator.svelte';
+	import Separator from '@shadcn-ui/separator/separator.svelte';
 	import IconMenu from '@icons/IconMenu.svelte';
 	import Search from '@molecules/Search.svelte';
 	import SidebarNav from './@components/SidebarNav.svelte';

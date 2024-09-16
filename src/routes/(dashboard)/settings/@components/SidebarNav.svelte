@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@atoms/select';
-	import { Button } from '@atoms/button';
+	import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shadcn-ui/select';
+	import { Button } from '@shadcn-ui/button';
 	import { cn } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import type { Selected } from 'bits-ui';

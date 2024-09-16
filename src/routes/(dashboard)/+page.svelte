@@ -5,13 +5,14 @@
 	import Layout from '@organism/layout/Layout.svelte';
 	import LayoutHeader from '@organism/layout/LayoutHeader.svelte';
 	import LayoutBody from '@organism/layout/LayoutBody.svelte';
-	import { Button } from '@atoms/button';
+	import { Button } from '@shadcn-ui/button';
 	import Search from '@molecules/Search.svelte';
 	import ThemeSwitch from '@molecules/ThemeSwitch.svelte';
 	import TopNav from './@components/TopNav.svelte';
 	import UserNav from './@components/UserNav.svelte';
 	import RecentSales from './@components/RecentSales.svelte';
 	import { route } from '@/ROUTES';
+	import Switch from '@shadcn-ui/switch/switch.svelte';
 
 	const topNav = [
 		{
@@ -50,6 +51,7 @@
 
 	<!-- ===== Main ===== -->
 	<LayoutBody>
+		<Switch />
 		<div class="mb-2 flex items-center justify-between space-y-2">
 			<h1 class="text-2xl font-bold tracking-tight">Dashboard</h1>
 			<div class="flex items-center space-x-2">

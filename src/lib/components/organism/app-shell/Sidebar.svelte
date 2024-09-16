@@ -12,7 +12,7 @@
 	import { writable } from 'svelte/store';
 	import LayoutHeader from '@organism/layout/LayoutHeader.svelte';
 	import { onMount, tick } from 'svelte';
-	import Button from '@atoms/button/button.svelte';
+	import Button from '@shadcn-ui/button/button.svelte';
 	import XIcon from '@/components/icons/IconX.svelte';
 	import IconMenu from '@/components/icons/IconMenu.svelte';
 	import IconX from '@/components/icons/IconX.svelte';

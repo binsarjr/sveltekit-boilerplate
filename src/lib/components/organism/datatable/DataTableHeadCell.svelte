@@ -1,5 +1,5 @@
 <script lang="ts" generics="Data">
-	import TableHead from '@atoms/table/table-head.svelte';
+	import TableHead from '@shadcn-ui/table/table-head.svelte';
 
 	import type { DefaultPlugin } from './DataTable.svelte';
 

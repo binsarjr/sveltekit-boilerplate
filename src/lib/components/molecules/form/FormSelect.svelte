@@ -4,7 +4,7 @@
 	import FormBase, { type FormBaseProps } from './FormBase.svelte';
 	import { getFormProvider } from './FormProvider.svelte';
 	import type { Options } from './types';
-	import * as Select from '@atoms/select';
+	import * as Select from '@shadcn-ui/select';
 	const formProvider = getFormProvider();
 
 	type $$Props = FormBaseProps & {

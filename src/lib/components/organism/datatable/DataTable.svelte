@@ -84,13 +84,13 @@
 
 	import { type Writable } from 'svelte/store';
 
-	import TableCell from '@atoms/table/table-cell.svelte';
+	import TableCell from '@shadcn-ui/table/table-cell.svelte';
 
-	import Table from '@atoms/table/table.svelte';
+	import Table from '@shadcn-ui/table/table.svelte';
 
-	import TableBody from '@atoms/table/table-body.svelte';
-	import TableHeader from '@atoms/table/table-header.svelte';
-	import TableRow from '@atoms/table/table-row.svelte';
+	import TableBody from '@shadcn-ui/table/table-body.svelte';
+	import TableHeader from '@shadcn-ui/table/table-header.svelte';
+	import TableRow from '@shadcn-ui/table/table-row.svelte';
 	import {
 		createTable,
 		Render,

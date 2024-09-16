@@ -11,7 +11,7 @@
 </script>
 
 <script lang="ts">
-	import Label from '@atoms/label/label.svelte';
+	import Label from '@shadcn-ui/label/label.svelte';
 
 	import type { HTMLInputAttributes } from 'svelte/elements';
 

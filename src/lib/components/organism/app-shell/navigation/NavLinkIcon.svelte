@@ -2,8 +2,8 @@
 	import { cn } from '@/utils';
 	import { initCheckActiveNav } from './Nav.svelte';
 	import { page } from '$app/stores';
-	import { TooltipContent, TooltipTrigger, Tooltip } from '@atoms/tooltip';
-	import { buttonVariants } from '@atoms/button';
+	import { TooltipContent, TooltipTrigger, Tooltip } from '@shadcn-ui/tooltip';
+	import { buttonVariants } from '@shadcn-ui/button';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 

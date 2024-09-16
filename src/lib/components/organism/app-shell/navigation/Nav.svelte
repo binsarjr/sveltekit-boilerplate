@@ -19,7 +19,7 @@
 	import NavLinkIcon from './NavLinkIcon.svelte';
 	import NavLinkDropdown from './NavLinkDropdown.svelte';
 	import NavLink from './NavLink.svelte';
-	import { Tooltip } from '@atoms/tooltip';
+	import { Tooltip } from '@shadcn-ui/tooltip';
 
 	export let links;
 	export let isCollapsed;

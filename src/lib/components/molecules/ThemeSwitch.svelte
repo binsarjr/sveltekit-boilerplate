@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { Button } from '@atoms/button';
+	import { Button } from '@shadcn-ui/button';
 	import IconMoon from '@icons/IconMoon.svelte';
 	import IconSun from '@icons/IconSun.svelte';
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { theme } from './ThemeProvider.svelte';
 
 	function toggleTheme() {

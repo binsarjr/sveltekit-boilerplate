@@ -1,5 +1,5 @@
 <script>
-	import { Button } from '@atoms/button';
+	import { Button } from '@shadcn-ui/button';
 </script>
 
 <div class="h-svh">

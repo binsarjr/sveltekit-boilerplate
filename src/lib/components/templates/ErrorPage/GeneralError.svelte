@@ -1,5 +1,5 @@
 <script>
-	import { Button } from '@atoms/button';
+	import { Button } from '@shadcn-ui/button';
 	import { cn } from '@/utils';
 
 	export let code = 500;
