@@ -1,5 +1,12 @@
 <script context="module" lang="ts">
-	import { addHiddenColumns, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
+	import {
+		addHiddenColumns,
+		addSortBy,
+		addTableFilter,
+		type SortByColumnOptions,
+		type HiddenColumnsConfig,
+		type TableFilterColumnOptions
+	} from 'svelte-headless-table/plugins';
 
 	let defaultPlugin = {
 		sort: addSortBy<any>({}),
@@ -17,6 +24,10 @@
 	};
 	type DatatableColumn<Data> = Omit<DataColumnInit<Data, DefaultPlugin>, 'cell'> & {
 		cell?: (cell: CustomCell<Data>, state: TableState<Data, DefaultPlugin>) => RenderConfig;
+		plugins?: Partial<{
+			sort: SortByColumnOptions;
+			filter: TableFilterColumnOptions<Data>;
+		}>;
 	};
 
 	export type DatatableColumnDefinition<Data> = (
