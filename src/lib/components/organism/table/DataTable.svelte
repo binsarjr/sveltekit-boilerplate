@@ -1,12 +1,13 @@
 <script context="module" lang="ts">
-	import { addSortBy, addHiddenColumns, type PluginStates } from 'svelte-headless-table/plugins';
-	const defaultPlugin = {
+	import { addHiddenColumns, addSortBy } from 'svelte-headless-table/plugins';
+
+	let defaultPlugin = {
 		sort: addSortBy<any>({}),
 		hide: addHiddenColumns<any>()
 	};
 	export type DefaultPlugin = typeof defaultPlugin;
 
-	import type { TableState, DataBodyCell, RenderConfig } from 'svelte-headless-table';
+	import type { DataBodyCell, RenderConfig, TableState } from 'svelte-headless-table';
 
 	type CustomCell<Data> = DataBodyCell<Data, DefaultPlugin> & {
 		row: {
@@ -33,6 +34,9 @@
 				icon?: ConstructorOfATypedSvelteComponent;
 			}>;
 		}[];
+
+		multiSort: boolean;
+		serverSide: boolean;
 	}
 
 	export const setTableContext = (table: TableViewModel<any, DefaultPlugin>) =>
@@ -50,55 +54,46 @@
 </script>
 
 <script lang="ts" generics="Data">
-	import type { DeleteProps } from 'lucide-svelte/icons/delete';
 	import { createEventDispatcher, getContext, setContext } from 'svelte';
 
 	import DataTableHeadCell from './DataTableHeadCell.svelte';
 
-	import { readable, writable, type Writable } from 'svelte/store';
+	import { type Writable } from 'svelte/store';
 
 	import TableCell from '@atoms/table/table-cell.svelte';
 
-	import TableHead from '@atoms/table/table-head.svelte';
-
 	import Table from '@atoms/table/table.svelte';
 
-	import TableCaption from '@atoms/table/table-caption.svelte';
+	import TableBody from '@atoms/table/table-body.svelte';
 	import TableHeader from '@atoms/table/table-header.svelte';
 	import TableRow from '@atoms/table/table-row.svelte';
-	import Button from '@atoms/button/button.svelte';
-	import DataTableColumnHeader from './DataTableHeadCell.svelte';
 	import {
 		createTable,
-		Column,
-		DataColumn,
-		type DataColumnInitBase,
-		Subscribe,
 		Render,
-		type DataColumnInitIdAndKey,
+		Subscribe,
 		type DataColumnInit,
-		type GroupColumnInit,
-		type DataLabel,
 		type TableViewModel
 	} from 'svelte-headless-table';
-	import TableBody from '@atoms/table/table-body.svelte';
 	import DataTableToolbar from './DataTableToolbar.svelte';
 
 	export let data: Writable<Data[]>;
 	export let columns: DatatableColumnDefinition<Data>;
-	export let multiSort = false;
-	export let serverSide = false;
+	export let multiSort: TableOptions['multiSort'] = false;
+	export let serverSide: TableOptions['serverSide'] = false;
 	export let filterActions: TableOptions['filterActions'] = [];
 
-	setTableOptionsContext({ filterActions });
+	setTableOptionsContext({ filterActions, multiSort, serverSide });
 
 	{
-		// init sort plugin
-		defaultPlugin.sort = addSortBy<Data>({
-			isMultiSortEvent: (event) => multiSort,
-			disableMultiSort: !multiSort,
-			serverSide
-		});
+		// inject state plugin
+		defaultPlugin = {
+			sort: addSortBy<Data>({
+				isMultiSortEvent: (event) => multiSort,
+				disableMultiSort: !multiSort,
+				serverSide
+			}),
+			hide: addHiddenColumns<Data>()
+		};
 	}
 
 	const table = createTable(data, defaultPlugin);

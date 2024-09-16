@@ -4,7 +4,7 @@
 	import DataTableViewOptions from './DataTableViewOptions.svelte';
 	import DataTableFilter from './DataTableFilter.svelte';
 	import { getTableContext, getTableOptionsContext } from './DataTable.svelte';
-	import IconX from '@icons/IconX.svelte';
+	import { IconX } from '@tabler/icons-svelte';
 
 	const table = getTableContext();
 	const { flatColumns } = table;

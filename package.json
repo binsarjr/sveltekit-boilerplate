@@ -51,6 +51,7 @@
   "type": "module",
   "dependencies": {
     "@internationalized/date": "^3.5.5",
+    "@tabler/icons-svelte": "^3.17.0",
     "bits-ui": "^0.21.13",
     "clsx": "^2.1.1",
     "cmdk-sv": "^0.0.18",
