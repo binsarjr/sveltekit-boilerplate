@@ -155,7 +155,15 @@
 	const modelView = table.createViewModel(columnModelViews);
 	setTableContext(modelView);
 
-	const { headerRows, pluginStates, rows, tableAttrs, tableBodyAttrs, tableHeadAttrs } = modelView;
+	const {
+		headerRows,
+		pluginStates,
+		rows,
+		tableAttrs,
+		tableBodyAttrs,
+		tableHeadAttrs,
+		flatColumns
+	} = modelView;
 
 	const dispatch = createEventDispatcher();
 
@@ -183,34 +191,20 @@
 			<TableBody {...$tableBodyAttrs} motionLayoutId="tbody">
 				{#each $rows as row (row.id)}
 					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-						<Motion let:motion={rowMotion} layout layoutId={row.id}>
-							<tr
-								{...rowAttrs}
-								use:rowMotion
-								class={cn(
-									'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
-								)}
-							>
-								{#each row.cells as cell (cell.id)}
-									<Motion
-										let:motion={cellMotion}
-										layout
-										layoutId={'row-' + row.id + '-cell-' + cell.id}
-									>
-										<Subscribe attrs={cell.attrs()} let:attrs>
-											<td
-												use:cellMotion
-												class={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0')}
-												{...attrs}
-											>
-												<Render of={cell.render()} />
-											</td>
-										</Subscribe>
-									</Motion>
-								{/each}
-							</tr>
-						</Motion>
+						<TableRow {...rowAttrs} motionLayoutId={'row-' + row.id}>
+							{#each row.cells as cell (cell.id)}
+								<Subscribe attrs={cell.attrs()} let:attrs>
+									<TableCell {...attrs} motionLayoutId={'row-' + row.id + '-cell-' + cell.id}>
+										<Render of={cell.render()} />
+									</TableCell>
+								</Subscribe>
+							{/each}
+						</TableRow>
 					</Subscribe>
+				{:else}
+					<TableRow motionLayoutId={'row-not-found'}>
+						<TableCell colspan={flatColumns.length} class="text-center">No data found.</TableCell>
+					</TableRow>
 				{/each}
 			</TableBody>
 		</Table>
