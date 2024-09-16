@@ -78,6 +78,8 @@
 </script>
 
 <script lang="ts" generics="Data">
+	import { cn } from '@/utils';
+
 	import { createEventDispatcher, getContext, onMount, setContext } from 'svelte';
 
 	import DataTableHeadCell from './DataTableHeadCell.svelte';
@@ -99,6 +101,7 @@
 		type TableViewModel
 	} from 'svelte-headless-table';
 	import DataTableToolbar from './DataTableToolbar.svelte';
+	import { AnimateSharedLayout, Motion } from 'svelte-motion';
 
 	export let data: Writable<Data[]>;
 	export let columns: DatatableColumnDefinition<Data>;
@@ -177,21 +180,33 @@
 					</Subscribe>
 				{/each}
 			</TableHeader>
-			<TableBody {...$tableBodyAttrs}>
-				{#each $rows as row (row.id)}
-					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-						<TableRow {...rowAttrs}>
-							{#each row.cells as cell (cell.id)}
-								<Subscribe attrs={cell.attrs()} let:attrs>
-									<TableCell {...attrs}>
-										<Render of={cell.render()} />
-									</TableCell>
-								</Subscribe>
-							{/each}
-						</TableRow>
-					</Subscribe>
-				{/each}
-			</TableBody>
+			<AnimateSharedLayout type="switch">
+				<Motion let:motion={grid} layout>
+					<tbody {...$tableBodyAttrs} class={cn('[&_tr:last-child]:border-0')} use:grid>
+						{#each $rows as row (row.id)}
+							<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+								<Motion let:motion layout layoutId={row.id}>
+									<tr
+										{...rowAttrs}
+										use:motion
+										class={cn(
+											'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
+										)}
+									>
+										{#each row.cells as cell (cell.id)}
+											<Subscribe attrs={cell.attrs()} let:attrs>
+												<TableCell {...attrs}>
+													<Render of={cell.render()} />
+												</TableCell>
+											</Subscribe>
+										{/each}
+									</tr>
+								</Motion>
+							</Subscribe>
+						{/each}
+					</tbody>
+				</Motion>
+			</AnimateSharedLayout>
 		</Table>
 	</div>
 </div>

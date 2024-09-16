@@ -16,22 +16,21 @@
 		label: string;
 		priority: string;
 	};
-	let data = writable<Task[]>([
-		{
-			id: 'TASK-8782',
-			title: "You can't compress the program without quantifying the open-source SSD pixel!",
-			status: 'in progress',
-			label: 'documentation',
-			priority: 'medium'
-		},
-		{
-			id: 'TASK-7878',
-			title: 'Try to calculate the EXE feed, maybe it will index the multi-byte pixel!',
-			status: 'backlog',
-			label: 'documentation',
-			priority: 'medium'
-		}
-	]);
+	function createSampleTasks(count: number): Task[] {
+		const statuses = ['in progress', 'backlog', 'completed', 'canceled'];
+		const labels = ['documentation', 'bug', 'feature', 'enhancement'];
+		const priorities = ['low', 'medium', 'high', 'critical'];
+
+		return Array.from({ length: count }, (_, index) => ({
+			id: `TASK-${Math.floor(1000 + Math.random() * 9000)}`,
+			title: `Sample task ${index + 1}: ${Math.random().toString(36).substring(7)}`,
+			status: statuses[Math.floor(Math.random() * statuses.length)],
+			label: labels[Math.floor(Math.random() * labels.length)],
+			priority: priorities[Math.floor(Math.random() * priorities.length)]
+		}));
+	}
+
+	let data = writable<Task[]>(createSampleTasks(10));
 
 	const headers: DatatableColumnDefinition<Task> = [
 		{
