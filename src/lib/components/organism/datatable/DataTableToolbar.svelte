@@ -13,7 +13,7 @@
 
 	const tableOptions = getTableOptionsContext();
 
-	let selectedFilterActions: Set<string>[] = [];
+	export let selectedFilterActions: Set<string>[] = [];
 	for (let i = 0; i < tableOptions.filterActions.length; i++) {
 		selectedFilterActions.push(new Set());
 	}

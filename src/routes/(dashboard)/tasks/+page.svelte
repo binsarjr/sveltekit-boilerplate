@@ -5,7 +5,7 @@
 	import LayoutHeader from '@organism/layout/LayoutHeader.svelte';
 	import UserNav from '../@components/UserNav.svelte';
 	import LayoutBody from '@organism/layout/LayoutBody.svelte';
-	import DataTable, { type DatatableColumnDefinition } from '@organism/table/DataTable.svelte';
+	import DataTable, { type DatatableColumnDefinition } from '@organism/datatable/DataTable.svelte';
 	import { addSortBy } from 'svelte-headless-table/plugins';
 	import { writable } from 'svelte/store';
 
