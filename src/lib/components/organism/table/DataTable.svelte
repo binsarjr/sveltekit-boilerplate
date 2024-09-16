@@ -1,9 +1,10 @@
 <script context="module" lang="ts">
-	import { addHiddenColumns, addSortBy } from 'svelte-headless-table/plugins';
+	import { addHiddenColumns, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
 
 	let defaultPlugin = {
 		sort: addSortBy<any>({}),
-		hide: addHiddenColumns<any>()
+		hide: addHiddenColumns<any>(),
+		filter: addTableFilter<any>()
 	};
 	export type DefaultPlugin = typeof defaultPlugin;
 
@@ -25,7 +26,7 @@
 		  })
 	)[];
 
-	interface TableOptions {
+	interface TableOptions<Data> {
 		filterActions: {
 			label: string;
 			options: Array<{
@@ -34,6 +35,11 @@
 				icon?: ConstructorOfATypedSvelteComponent;
 			}>;
 		}[];
+		onFilter?: (options: {
+			value: string;
+			filterValue: string;
+			filterActions: { label: string; selectedValues: Set<string> }[];
+		}) => boolean;
 
 		multiSort: boolean;
 		serverSide: boolean;
@@ -45,16 +51,16 @@
 	export const getTableContext = () =>
 		getContext<TableViewModel<any, DefaultPlugin>>('__table_provider__');
 
-	export const setTableOptionsContext = (options: TableOptions) => {
+	export const setTableOptionsContext = (options: TableOptions<any>) => {
 		setContext('__table_options_provider__', options);
 	};
 	export const getTableOptionsContext = () => {
-		return getContext<TableOptions>('__table_options_provider__');
+		return getContext<TableOptions<any>>('__table_options_provider__');
 	};
 </script>
 
 <script lang="ts" generics="Data">
-	import { createEventDispatcher, getContext, setContext } from 'svelte';
+	import { createEventDispatcher, getContext, onMount, setContext } from 'svelte';
 
 	import DataTableHeadCell from './DataTableHeadCell.svelte';
 
@@ -78,9 +84,10 @@
 
 	export let data: Writable<Data[]>;
 	export let columns: DatatableColumnDefinition<Data>;
-	export let multiSort: TableOptions['multiSort'] = false;
-	export let serverSide: TableOptions['serverSide'] = false;
-	export let filterActions: TableOptions['filterActions'] = [];
+	export let multiSort: TableOptions<Data>['multiSort'] = false;
+	export let serverSide: TableOptions<Data>['serverSide'] = false;
+	export let filterActions: TableOptions<Data>['filterActions'] = [];
+	export let onFilter: TableOptions<Data>['onFilter'] = undefined;
 
 	setTableOptionsContext({ filterActions, multiSort, serverSide });
 
@@ -92,7 +99,15 @@
 				disableMultiSort: !multiSort,
 				serverSide
 			}),
-			hide: addHiddenColumns<Data>()
+			hide: addHiddenColumns<Data>(),
+			filter: addTableFilter<Data>({
+				serverSide,
+				fn: serverSide
+					? ({ filterValue, value }) => {
+							return onFilter?.({ filterValue, value, filterActions: [] }) || true;
+						}
+					: undefined
+			})
 		};
 	}
 

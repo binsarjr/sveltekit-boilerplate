@@ -7,7 +7,9 @@
 	import { IconX } from '@tabler/icons-svelte';
 
 	const table = getTableContext();
-	const { flatColumns } = table;
+	const { flatColumns, pluginStates } = table;
+
+	const { filterValue, preFilteredRows } = pluginStates.filter;
 
 	const tableOptions = getTableOptionsContext();
 
@@ -16,11 +18,13 @@
 		selectedFilterActions.push(new Set());
 	}
 
-	$: isFiltered = selectedFilterActions.some((selected) => selected.size > 0);
+	$: isFiltered =
+		selectedFilterActions.some((selected) => selected.size > 0) || $filterValue.length > 0;
 
 	const resetFilters = () => {
 		selectedFilterActions.forEach((selected) => selected.clear());
 		selectedFilterActions = selectedFilterActions;
+		$filterValue = '';
 	};
 </script>
 
@@ -28,7 +32,11 @@
 	<div
 		class="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2"
 	>
-		<Input placeholder="Filter tasks..." class="h-8 w-[150px] lg:w-[250px]" />
+		<Input
+			placeholder="Filter tasks..."
+			class="h-8 w-[150px] lg:w-[250px]"
+			bind:value={$filterValue}
+		/>
 		<div class="flex gap-x-2">
 			{#each tableOptions.filterActions as { label, options }, i}
 				<DataTableFilter title={label} {options} bind:selectedValues={selectedFilterActions[i]} />

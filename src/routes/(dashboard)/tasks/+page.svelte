@@ -114,6 +114,10 @@
 					}
 				]}
 				serverSide
+				onFilter={({ filterValue, value, filterActions }) => {
+					console.log(filterValue, value, filterActions);
+					return true;
+				}}
 				on:sorting={(e) => onSorting(e.detail)}
 			/>
 		</div>
