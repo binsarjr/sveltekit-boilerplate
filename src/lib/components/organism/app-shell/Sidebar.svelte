@@ -19,6 +19,7 @@
 	import Nav from './navigation/Nav.svelte';
 	import IconChevronsLeft from '@icons/IconChevronsLeft.svelte';
 	import { route } from '@/ROUTES';
+	import { Motion } from 'svelte-motion';
 
 	const navCondition = async () => {
 		if (!browser) return;
@@ -175,68 +176,71 @@
 	];
 </script>
 
-<aside
-	class={cn(
-		`fixed left-0 right-0 top-0 z-50 w-full border-r-2 border-r-muted transition-[width] md:bottom-0 md:right-auto md:h-svh ${$isCollapsed ? 'md:w-14' : 'md:w-64'}`,
-		$$props.class
-	)}
->
-	<!-- Overlay in Mobile -->
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
-		on:click={() => ($navOpened = false)}
-		class={`absolute inset-0 transition-[opacity] delay-100 duration-700 ${$navOpened ? 'h-svh opacity-50' : 'h-0 opacity-0'} w-full bg-black md:hidden`}
-	/>
-
-	<Layout fixed class={$navOpened ? 'h-svh' : ''}>
-		<LayoutHeader sticky class="z-50 flex justify-between px-4 py-3 shadow-sm md:px-4">
-			<div class={`flex items-center ${!$isCollapsed ? 'gap-2' : ''}`}>
-				<div class={`transition-all ${$isCollapsed ? 'h-6 w-6' : 'h-8 w-8'}`}>SA</div>
-				<div
-					class={`flex flex-col justify-end truncate ${$isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
-				>
-					<span class="font-medium">Shadcn Admin</span>
-					<span class="text-xs">Vite + ShadcnUI</span>
-				</div>
-			</div>
-
-			<!-- Toggle button in mobile -->
-			<Button
-				variant="ghost"
-				size="icon"
-				class="md:hidden"
-				aria-label="Toggle Navigation"
-				aria-controls="sidebar-menu"
-				aria-expanded={$navOpened}
-				on:click={() => ($navOpened = !$navOpened)}
-			>
-				{#if $navOpened}
-					<IconMenu />
-				{:else}
-					<IconX />
-				{/if}
-			</Button>
-		</LayoutHeader>
-
-		<!-- Navigation Links -->
-
-		<Nav
-			id="sidebar-menu"
-			class={`z-40 h-full flex-1 overflow-auto ${$navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
-			closeNav={() => ($navOpened = false)}
-			bind:isCollapsed={$isCollapsed}
-			links={sidelinks}
+<Motion let:motion={sidebarMotion} layout>
+	<aside
+		class={cn(
+			`fixed left-0 right-0 top-0 z-50 w-full border-r-2 border-r-muted transition-[width] md:bottom-0 md:right-auto md:h-svh ${$isCollapsed ? 'md:w-14' : 'md:w-64'}`,
+			$$props.class
+		)}
+		use:sidebarMotion
+	>
+		<!-- Overlay in Mobile -->
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div
+			on:click={() => ($navOpened = false)}
+			class={`absolute inset-0 transition-[opacity] delay-100 duration-700 ${$navOpened ? 'h-svh opacity-50' : 'h-0 opacity-0'} w-full bg-black md:hidden`}
 		/>
 
-		<!-- Scrollbar width toggle button -->
-		<Button
-			on:click={() => ($isCollapsed = !$isCollapsed)}
-			size="icon"
-			variant="outline"
-			class="absolute -right-5 top-1/2 z-50 hidden rounded-full md:inline-flex"
-		>
-			<IconChevronsLeft stroke={1.5} class={`h-5 w-5 ${$isCollapsed ? 'rotate-180' : ''}`} />
-		</Button>
-	</Layout>
-</aside>
+		<Layout fixed class={$navOpened ? 'h-svh' : ''}>
+			<LayoutHeader sticky class="z-50 flex justify-between px-4 py-3 shadow-sm md:px-4">
+				<div class={`flex items-center ${!$isCollapsed ? 'gap-2' : ''}`}>
+					<div class={`transition-all ${$isCollapsed ? 'h-6 w-6' : 'h-8 w-8'}`}>SA</div>
+					<div
+						class={`flex flex-col justify-end truncate ${$isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
+					>
+						<span class="font-medium">Shadcn Admin</span>
+						<span class="text-xs">Vite + ShadcnUI</span>
+					</div>
+				</div>
+
+				<!-- Toggle button in mobile -->
+				<Button
+					variant="ghost"
+					size="icon"
+					class="md:hidden"
+					aria-label="Toggle Navigation"
+					aria-controls="sidebar-menu"
+					aria-expanded={$navOpened}
+					on:click={() => ($navOpened = !$navOpened)}
+				>
+					{#if $navOpened}
+						<IconMenu />
+					{:else}
+						<IconX />
+					{/if}
+				</Button>
+			</LayoutHeader>
+
+			<!-- Navigation Links -->
+
+			<Nav
+				id="sidebar-menu"
+				class={`z-40 h-full flex-1 overflow-auto ${$navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
+				closeNav={() => ($navOpened = false)}
+				bind:isCollapsed={$isCollapsed}
+				links={sidelinks}
+			/>
+
+			<!-- Scrollbar width toggle button -->
+			<Button
+				on:click={() => ($isCollapsed = !$isCollapsed)}
+				size="icon"
+				variant="outline"
+				class="absolute -right-5 top-1/2 z-50 hidden rounded-full md:inline-flex"
+			>
+				<IconChevronsLeft stroke={1.5} class={`h-5 w-5 ${$isCollapsed ? 'rotate-180' : ''}`} />
+			</Button>
+		</Layout>
+	</aside>
+</Motion>
