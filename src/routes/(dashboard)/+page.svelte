@@ -12,7 +12,7 @@
 	import UserNav from './@components/UserNav.svelte';
 	import RecentSales from './@components/RecentSales.svelte';
 	import { route } from '@/ROUTES';
-	import Switch from '@shadcn-ui/switch/switch.svelte';
+	import { Switch } from '@atoms/switch';
 
 	const topNav = [
 		{
