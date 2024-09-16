@@ -104,7 +104,9 @@
 						accessor: 'status',
 						options: [
 							{ value: 'in progress', label: 'In Progress' },
-							{ value: 'backlog', label: 'Backlog' }
+							{ value: 'backlog', label: 'Backlog' },
+							{ value: 'completed', label: 'Completed' },
+							{ value: 'canceled', label: 'Canceled' }
 						]
 					},
 					{
