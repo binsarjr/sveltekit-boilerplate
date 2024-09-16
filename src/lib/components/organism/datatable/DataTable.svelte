@@ -185,20 +185,30 @@
 					<tbody {...$tableBodyAttrs} class={cn('[&_tr:last-child]:border-0')} use:grid>
 						{#each $rows as row (row.id)}
 							<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-								<Motion let:motion layout layoutId={row.id}>
+								<Motion let:motion={rowMotion} layout layoutId={row.id}>
 									<tr
 										{...rowAttrs}
-										use:motion
+										use:rowMotion
 										class={cn(
 											'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
 										)}
 									>
 										{#each row.cells as cell (cell.id)}
-											<Subscribe attrs={cell.attrs()} let:attrs>
-												<TableCell {...attrs}>
-													<Render of={cell.render()} />
-												</TableCell>
-											</Subscribe>
+											<Motion
+												let:motion={cellMotion}
+												layout
+												layoutId={'row-' + row.id + '-cell-' + cell.id}
+											>
+												<Subscribe attrs={cell.attrs()} let:attrs>
+													<td
+														use:cellMotion
+														class={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0')}
+														{...attrs}
+													>
+														<Render of={cell.render()} />
+													</td>
+												</Subscribe>
+											</Motion>
 										{/each}
 									</tr>
 								</Motion>

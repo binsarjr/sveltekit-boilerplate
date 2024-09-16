@@ -29,7 +29,7 @@
 </script>
 
 <Subscribe attrs={cell.attrs()} props={cell.props()} let:attrs let:props>
-	<TableHead {...attrs}>
+	<TableHead {...attrs} motionLayoutId={'thead' + cell.id}>
 		{#if cell.isGroup() || props.sort.disabled}
 			<div class={cn(className)} {...attrs}>{cell.label}</div>
 		{:else}
