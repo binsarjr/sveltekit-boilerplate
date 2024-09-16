@@ -180,43 +180,39 @@
 					</Subscribe>
 				{/each}
 			</TableHeader>
-			<AnimateSharedLayout type="switch">
-				<Motion let:motion={grid} layout>
-					<tbody {...$tableBodyAttrs} class={cn('[&_tr:last-child]:border-0')} use:grid>
-						{#each $rows as row (row.id)}
-							<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-								<Motion let:motion={rowMotion} layout layoutId={row.id}>
-									<tr
-										{...rowAttrs}
-										use:rowMotion
-										class={cn(
-											'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
-										)}
+			<TableBody {...$tableBodyAttrs} motionLayoutId="tbody">
+				{#each $rows as row (row.id)}
+					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+						<Motion let:motion={rowMotion} layout layoutId={row.id}>
+							<tr
+								{...rowAttrs}
+								use:rowMotion
+								class={cn(
+									'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
+								)}
+							>
+								{#each row.cells as cell (cell.id)}
+									<Motion
+										let:motion={cellMotion}
+										layout
+										layoutId={'row-' + row.id + '-cell-' + cell.id}
 									>
-										{#each row.cells as cell (cell.id)}
-											<Motion
-												let:motion={cellMotion}
-												layout
-												layoutId={'row-' + row.id + '-cell-' + cell.id}
+										<Subscribe attrs={cell.attrs()} let:attrs>
+											<td
+												use:cellMotion
+												class={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0')}
+												{...attrs}
 											>
-												<Subscribe attrs={cell.attrs()} let:attrs>
-													<td
-														use:cellMotion
-														class={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0')}
-														{...attrs}
-													>
-														<Render of={cell.render()} />
-													</td>
-												</Subscribe>
-											</Motion>
-										{/each}
-									</tr>
-								</Motion>
-							</Subscribe>
-						{/each}
-					</tbody>
-				</Motion>
-			</AnimateSharedLayout>
+												<Render of={cell.render()} />
+											</td>
+										</Subscribe>
+									</Motion>
+								{/each}
+							</tr>
+						</Motion>
+					</Subscribe>
+				{/each}
+			</TableBody>
 		</Table>
 	</div>
 </div>
