@@ -9,21 +9,21 @@
 	const table = getTableContext();
 	const { flatColumns, pluginStates } = table;
 
-	const { filterValue } = pluginStates.filter;
+	const { filterValue, selectedValues } = pluginStates.filter;
 
 	const tableOptions = getTableOptionsContext();
 
-	export let selectedFilterActions: Set<string>[] = [];
-	for (let i = 0; i < tableOptions.filterActions.length; i++) {
-		selectedFilterActions.push(new Set());
-	}
-
 	$: isFiltered =
-		selectedFilterActions.some((selected) => selected.size > 0) || $filterValue.length > 0;
+		Object.values($selectedValues).some((selected) => (selected?.size || 0) > 0) ||
+		$filterValue.length > 0;
 
 	const resetFilters = () => {
-		selectedFilterActions.forEach((selected) => selected.clear());
-		selectedFilterActions = selectedFilterActions;
+		Object.keys($selectedValues).forEach((key) => {
+			if ($selectedValues[key]) {
+				$selectedValues[key].clear();
+			}
+		});
+		$selectedValues = { ...$selectedValues };
 		$filterValue = '';
 	};
 </script>
@@ -38,8 +38,8 @@
 			bind:value={$filterValue}
 		/>
 		<div class="flex gap-x-2">
-			{#each tableOptions.filterActions as { label, options }, i}
-				<DataTableFilter title={label} {options} bind:selectedValues={selectedFilterActions[i]} />
+			{#each tableOptions.filterActions as { label, options, accessor }, i}
+				<DataTableFilter title={label} {options} bind:selectedValues={$selectedValues[accessor]} />
 			{/each}
 		</div>
 		{#if isFiltered}

@@ -48,6 +48,10 @@
 			accessor: 'title'
 		},
 		{
+			header: 'Status',
+			accessor: 'status'
+		},
+		{
 			header: 'Priority',
 			accessor: 'priority'
 		}
@@ -98,14 +102,15 @@
 				filterActions={[
 					{
 						label: 'Status',
+						accessor: 'status',
 						options: [
-							{ value: 'open', label: 'Open' },
-							{ value: 'closed', label: 'Closed' },
-							{ value: 'all', label: 'All' }
+							{ value: 'in progress', label: 'In Progress' },
+							{ value: 'backlog', label: 'Backlog' }
 						]
 					},
 					{
 						label: 'Priority',
+						accessor: 'priority',
 						options: [
 							{ value: 'low', label: 'Low' },
 							{ value: 'medium', label: 'Medium' },
@@ -113,11 +118,6 @@
 						]
 					}
 				]}
-				serverSide
-				onFilter={({ filterValue, value, filterActions }) => {
-					console.log(filterValue, value, filterActions);
-					return true;
-				}}
 				on:sorting={(e) => onSorting(e.detail)}
 			/>
 		</div>

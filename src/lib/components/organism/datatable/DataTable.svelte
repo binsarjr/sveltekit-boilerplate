@@ -1,5 +1,9 @@
 <script context="module" lang="ts">
-	import { addDatatableFilter } from './plugins/addDatatableFilter';
+	import {
+		addDatatableFilter,
+		type DatatableFilterFnProps,
+		type DatatableFilterStateSelectedValues
+	} from './plugins/addDatatableFilter';
 
 	import {
 		addHiddenColumns,
@@ -42,6 +46,7 @@
 	interface TableOptions<Data> {
 		filterActions: {
 			label: string;
+			accessor: keyof Data & string;
 			options: Array<{
 				value: string;
 				label: string;
@@ -51,7 +56,7 @@
 		onFilter?: (options: {
 			value: string;
 			filterValue: string;
-			filterActions: { label: string; selectedValues: Set<string> }[];
+			selectedValues: DatatableFilterStateSelectedValues<Data>;
 		}) => boolean;
 
 		multiSort: boolean;
@@ -100,7 +105,13 @@
 	export let multiSort: TableOptions<Data>['multiSort'] = false;
 	export let serverSide: TableOptions<Data>['serverSide'] = false;
 	export let filterActions: TableOptions<Data>['filterActions'] = [];
-	export let onFilter: TableOptions<Data>['onFilter'] = undefined;
+	export let onFilter:
+		| ((options: {
+				value: string;
+				filterValue: string;
+				selectedValues: DatatableFilterStateSelectedValues<Data>;
+		  }) => boolean)
+		| undefined = undefined;
 
 	setTableOptionsContext({ filterActions, multiSort, serverSide });
 
@@ -116,8 +127,8 @@
 			filter: addDatatableFilter<Data>({
 				serverSide,
 				fn: onFilter
-					? ({ filterValue, value }) => {
-							return onFilter?.({ filterValue, value, filterActions: [] }) || true;
+					? ({ filterValue, value, selectedValues }: DatatableFilterFnProps<Data>) => {
+							return onFilter?.({ filterValue, value, selectedValues }) || true;
 						}
 					: undefined
 			})

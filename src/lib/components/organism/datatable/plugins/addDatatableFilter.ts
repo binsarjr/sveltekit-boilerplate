@@ -1,6 +1,7 @@
 import type { BodyRow } from 'svelte-headless-table';
 import {} from 'svelte-headless-table';
 import {
+	matchFilter,
 	textPrefixFilter,
 	type DeriveRowsFn,
 	type NewTablePropSet,
@@ -9,14 +10,19 @@ import {
 import { derived, writable, type Writable } from 'svelte/store';
 
 export interface DatatableFilterConfig {
-	fn?: DatatableFilterFn;
+	fn?: DatatableFilterFn<any>;
 	initialFilterValue?: string;
 	includeHiddenColumns?: boolean;
 	serverSide?: boolean;
 }
 
+export type DatatableFilterStateSelectedValues<Item> = Partial<{
+	[key in keyof Item]: Set<string>;
+}>;
+
 export interface DatatableFilterState<Item> {
 	filterValue: Writable<string>;
+	selectedValues: Writable<DatatableFilterStateSelectedValues<Item>>;
 }
 
 export interface DatatableFilterColumnOptions<Item> {
@@ -24,11 +30,12 @@ export interface DatatableFilterColumnOptions<Item> {
 	getFilterValue?: (value: any) => string;
 }
 
-export type DatatableFilterFn = (props: DatatableFilterFnProps) => boolean;
+export type DatatableFilterFn<Item> = (props: DatatableFilterFnProps<Item>) => boolean;
 
-export type DatatableFilterFnProps = {
+export type DatatableFilterFnProps<Item> = {
 	filterValue: string;
 	value: string;
+	selectedValues: DatatableFilterStateSelectedValues<Item>;
 };
 
 export type DatatableFilterPropSet = NewTablePropSet<{
@@ -38,13 +45,14 @@ export type DatatableFilterPropSet = NewTablePropSet<{
 }>;
 
 interface GetFilteredRowsOptions {
-	fn: DatatableFilterFn;
+	fn: DatatableFilterFn<any>;
 	includeHiddenColumns: boolean;
 }
 
 const getFilteredRows = <Item, Row extends BodyRow<Item>>(
 	rows: Row[],
 	filterValue: string,
+	selectedValues: DatatableFilterStateSelectedValues<Item>,
 	columnOptions: Record<string, DatatableFilterColumnOptions<Item>>,
 	{ fn, includeHiddenColumns }: GetFilteredRowsOptions
 ): Row[] => {
@@ -54,7 +62,7 @@ const getFilteredRows = <Item, Row extends BodyRow<Item>>(
 			if (subRows === undefined) {
 				return row;
 			}
-			const filteredSubRows = getFilteredRows(subRows, filterValue, columnOptions, {
+			const filteredSubRows = getFilteredRows(subRows, filterValue, selectedValues, columnOptions, {
 				fn,
 				includeHiddenColumns
 			});
@@ -82,8 +90,18 @@ const getFilteredRows = <Item, Row extends BodyRow<Item>>(
 				if (options?.getFilterValue !== undefined) {
 					value = options?.getFilterValue(value);
 				}
-				const matches = fn({ value: String(value), filterValue });
-				return matches;
+				const matches = fn({ value: String(value), filterValue, selectedValues });
+				const selectedValuesMatch = Object.entries(selectedValues).every(([key, selected]) => {
+					if (!selected || (selected as Set<string>)?.size === 0) return true;
+					return Array.from(selected as Set<string>).some((selectedValue) => {
+						return matchFilter({
+							filterValue: selectedValue,
+							value: String(value)
+						});
+					});
+				});
+
+				return matches && selectedValuesMatch;
 			});
 			return rowCellMatches.includes(true);
 		});
@@ -104,19 +122,29 @@ export const addDatatableFilter =
 	> =>
 	({ columnOptions }) => {
 		const filterValue = writable(initialFilterValue);
+		const selectedValues = writable<DatatableFilterStateSelectedValues<Item>>({});
 
-		const pluginState: DatatableFilterState<Item> = { filterValue };
+		const pluginState: DatatableFilterState<Item> = { filterValue, selectedValues };
 
 		const deriveRows: DeriveRowsFn<Item> = (rows) => {
-			return derived([rows, filterValue], ([$rows, $filterValue]) => {
-				const $filteredRows = getFilteredRows($rows, $filterValue, columnOptions, {
-					fn,
-					includeHiddenColumns
-				});
-				if (serverSide) return $rows;
+			return derived(
+				[rows, filterValue, selectedValues],
+				([$rows, $filterValue, $selectedValues]) => {
+					const $filteredRows = getFilteredRows(
+						$rows,
+						$filterValue,
+						$selectedValues,
+						columnOptions,
+						{
+							fn,
+							includeHiddenColumns
+						}
+					);
+					if (serverSide) return $rows;
 
-				return $filteredRows;
-			});
+					return $filteredRows;
+				}
+			);
 		};
 
 		return {
