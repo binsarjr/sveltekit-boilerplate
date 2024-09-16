@@ -92,7 +92,30 @@
 			</div>
 		</div>
 		<div class="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-			<DataTable {data} columns={headers} serverSide on:sorting={(e) => onSorting(e.detail)} />
+			<DataTable
+				{data}
+				columns={headers}
+				filterActions={[
+					{
+						label: 'Status',
+						options: [
+							{ value: 'open', label: 'Open' },
+							{ value: 'closed', label: 'Closed' },
+							{ value: 'all', label: 'All' }
+						]
+					},
+					{
+						label: 'Priority',
+						options: [
+							{ value: 'low', label: 'Low' },
+							{ value: 'medium', label: 'Medium' },
+							{ value: 'high', label: 'High' }
+						]
+					}
+				]}
+				serverSide
+				on:sorting={(e) => onSorting(e.detail)}
+			/>
 		</div>
 	</LayoutBody>
 </Layout>

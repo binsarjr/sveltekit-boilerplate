@@ -24,17 +24,29 @@
 		  })
 	)[];
 
+	interface TableOptions {
+		filterActions: {
+			label: string;
+			options: Array<{
+				value: string;
+				label: string;
+				icon?: ConstructorOfATypedSvelteComponent;
+			}>;
+		}[];
+	}
+
 	export const setTableContext = (table: TableViewModel<any, DefaultPlugin>) =>
 		setContext('__table_provider__', table);
 
 	export const getTableContext = () =>
 		getContext<TableViewModel<any, DefaultPlugin>>('__table_provider__');
 
-	export const setPluginStateContext = (pluginState: PluginStates<DefaultPlugin>) =>
-		setContext('__plugin_state_provider__', pluginState);
-
-	export const getPluginStateContext = () =>
-		getContext<PluginStates<DefaultPlugin>>('__plugin_state_provider__');
+	export const setTableOptionsContext = (options: TableOptions) => {
+		setContext('__table_options_provider__', options);
+	};
+	export const getTableOptionsContext = () => {
+		return getContext<TableOptions>('__table_options_provider__');
+	};
 </script>
 
 <script lang="ts" generics="Data">
@@ -76,6 +88,9 @@
 	export let columns: DatatableColumnDefinition<Data>;
 	export let multiSort = false;
 	export let serverSide = false;
+	export let filterActions: TableOptions['filterActions'] = [];
+
+	setTableOptionsContext({ filterActions });
 
 	{
 		// init sort plugin
@@ -104,8 +119,6 @@
 	setTableContext(modelView);
 
 	const { headerRows, pluginStates, rows, tableAttrs, tableBodyAttrs, tableHeadAttrs } = modelView;
-
-	setPluginStateContext(pluginStates);
 
 	const dispatch = createEventDispatcher();
 

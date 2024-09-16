@@ -3,6 +3,25 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import DataTableViewOptions from './DataTableViewOptions.svelte';
 	import DataTableFilter from './DataTableFilter.svelte';
+	import { getTableContext, getTableOptionsContext } from './DataTable.svelte';
+	import IconX from '@icons/IconX.svelte';
+
+	const table = getTableContext();
+	const { flatColumns } = table;
+
+	const tableOptions = getTableOptionsContext();
+
+	let selectedFilterActions: Set<string>[] = [];
+	for (let i = 0; i < tableOptions.filterActions.length; i++) {
+		selectedFilterActions.push(new Set());
+	}
+
+	$: isFiltered = selectedFilterActions.some((selected) => selected.size > 0);
+
+	const resetFilters = () => {
+		selectedFilterActions.forEach((selected) => selected.clear());
+		selectedFilterActions = selectedFilterActions;
+	};
 </script>
 
 <div class="flex items-center justify-between">
@@ -11,39 +30,16 @@
 	>
 		<Input placeholder="Filter tasks..." class="h-8 w-[150px] lg:w-[250px]" />
 		<div class="flex gap-x-2">
-			<DataTableFilter
-				title="Status"
-				options={[
-					{ value: 'open', label: 'Open' },
-					{ value: 'closed', label: 'Closed' },
-					{ value: 'all', label: 'All' }
-				]}
-			/>
-			<!-- {#if table.getColumn('status')}
-        <DataTableFacetedFilter
-          column={table.getColumn('status')}
-          title="Status"
-          options={statuses}
-        />
-      {/if}
-      {#if table.getColumn('priority')}
-        <DataTableFacetedFilter
-          column={table.getColumn('priority')}
-          title="Priority"
-          options={priorities}
-        />
-      {/if} -->
+			{#each tableOptions.filterActions as { label, options }, i}
+				<DataTableFilter title={label} {options} bind:selectedValues={selectedFilterActions[i]} />
+			{/each}
 		</div>
-		<!-- {#if isFiltered}
-      <Button
-        variant="ghost"
-        on:click={() => table.resetColumnFilters()}
-        class="h-8 px-2 lg:px-3"
-      >
-        Reset
-        <IconCross2 class="ml-2 h-4 w-4" />
-      </Button>
-    {/if} -->
+		{#if isFiltered}
+			<Button variant="ghost" class="h-8 px-2 lg:px-3" on:click={resetFilters}>
+				Reset
+				<IconX class="ml-2 h-4 w-4" />
+			</Button>
+		{/if}
 	</div>
 	<DataTableViewOptions />
 </div>

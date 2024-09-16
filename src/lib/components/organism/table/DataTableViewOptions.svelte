@@ -9,7 +9,7 @@
 	} from '$lib/components/ui/dropdown-menu';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import IconMixerHorizontal from '$lib/components/icons/IconMixerHorizontal.svelte';
-	import { getPluginStateContext, getTableContext } from './DataTable.svelte';
+	import { getTableContext } from './DataTable.svelte';
 	import { tick } from 'svelte';
 
 	const table = getTableContext();
