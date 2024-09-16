@@ -9,7 +9,7 @@
 	const table = getTableContext();
 	const { flatColumns, pluginStates } = table;
 
-	const { filterValue, preFilteredRows } = pluginStates.filter;
+	const { filterValue } = pluginStates.filter;
 
 	const tableOptions = getTableOptionsContext();
 

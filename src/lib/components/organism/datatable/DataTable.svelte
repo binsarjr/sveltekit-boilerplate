@@ -1,4 +1,6 @@
 <script context="module" lang="ts">
+	import { addDatatableFilter } from './plugins/addDatatableFilter';
+
 	import {
 		addHiddenColumns,
 		addSortBy,
@@ -11,8 +13,8 @@
 	let defaultPlugin = {
 		sort: addSortBy<any>({}),
 		hide: addHiddenColumns<any>(),
-		filter: addTableFilter<any>()
-	};
+		filter: addDatatableFilter<any>()
+	} as const;
 	export type DefaultPlugin = typeof defaultPlugin;
 
 	import type { DataBodyCell, RenderConfig, TableState } from 'svelte-headless-table';
@@ -111,9 +113,9 @@
 				serverSide
 			}),
 			hide: addHiddenColumns<Data>(),
-			filter: addTableFilter<Data>({
+			filter: addDatatableFilter<Data>({
 				serverSide,
-				fn: serverSide
+				fn: onFilter
 					? ({ filterValue, value }) => {
 							return onFilter?.({ filterValue, value, filterActions: [] }) || true;
 						}
