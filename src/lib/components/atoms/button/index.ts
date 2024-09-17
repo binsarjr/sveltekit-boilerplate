@@ -44,6 +44,8 @@ type Props = ButtonPrimitive.Props & {
 	variant?: Variant;
 	size?: Size;
 	radius?: Radius;
+	fullWidth?: boolean;
+	isLoading?: boolean;
 };
 
 type Events = ButtonPrimitive.Events;
