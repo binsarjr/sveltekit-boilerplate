@@ -38,7 +38,7 @@
 		{
 			title: 'Dashboard',
 			label: '',
-			href: '#',
+			href: route('/'),
 			icon: IconMenu
 		},
 		{
@@ -46,6 +46,20 @@
 			label: '3',
 			href: route('/tasks'),
 			icon: IconMenu
+		},
+		{
+			title: 'Components',
+			label: '',
+			href: 'javascript:void(0)',
+			icon: IconMenu,
+			sub: [
+				{
+					title: 'Button',
+					label: '',
+					href: route('/components/button'),
+					icon: ''
+				}
+			]
 		},
 		{
 			title: 'Chats',

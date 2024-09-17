@@ -10,6 +10,7 @@
  */
 const PAGES = {
 	'/': `/`,
+	'/components/button': `/components/button`,
 	'/settings': `/settings`,
 	'/settings/account': `/settings/account`,
 	'/settings/appearance': `/settings/appearance`,
@@ -145,6 +146,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 export type KIT_ROUTES = {
 	PAGES: {
 		'/': never;
+		'/components/button': never;
 		'/settings': never;
 		'/settings/account': never;
 		'/settings/appearance': never;
