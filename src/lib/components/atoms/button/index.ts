@@ -18,6 +18,9 @@ const buttonVariants = tv({
 			sm: 'h-9 rounded-md px-3 text-xs',
 			lg: 'h-11 rounded-md px-8',
 			icon: 'h-10 w-10'
+		},
+		fullWidth: {
+			true: 'w-full'
 		}
 	},
 	defaultVariants: {
