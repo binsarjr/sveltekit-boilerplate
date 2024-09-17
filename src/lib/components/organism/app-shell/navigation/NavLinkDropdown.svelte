@@ -5,7 +5,7 @@
 	import NavLink from './NavLink.svelte';
 	import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@shadcn-ui/collapsible';
 	import IconChevronDown from '@/components/icons/IconChevronDown.svelte';
-	import { buttonVariants } from '@shadcn-ui/button';
+	import { buttonVariants } from '@atoms/button';
 	import { slide } from 'svelte/transition';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);

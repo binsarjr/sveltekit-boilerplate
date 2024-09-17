@@ -12,7 +12,7 @@
 	import Avatar from '@shadcn-ui/avatar';
 	import AvatarFallback from '@shadcn-ui/avatar/avatar-fallback.svelte';
 	import AvatarImage from '@shadcn-ui/avatar/avatar-image.svelte';
-	import { Button } from '@shadcn-ui/button';
+	import { Button } from '@atoms/button';
 </script>
 
 <DropdownMenu>

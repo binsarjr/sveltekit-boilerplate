@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils.js';
-	import { Button } from '@shadcn-ui/button';
+	import { Button } from '@atoms/button';
 	import * as Command from '@shadcn-ui/command';
 	import * as Popover from '@shadcn-ui/popover';
 	import { createId } from '@paralleldrive/cuid2';

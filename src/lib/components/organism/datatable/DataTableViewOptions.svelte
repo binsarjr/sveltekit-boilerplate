@@ -7,7 +7,7 @@
 		DropdownMenuSeparator,
 		DropdownMenuCheckboxItem
 	} from '$lib/components/ui/dropdown-menu';
-	import Button from '$lib/components/ui/button/button.svelte';
+	import { Button } from '@atoms/button';
 	import IconMixerHorizontal from '$lib/components/icons/IconMixerHorizontal.svelte';
 	import { getTableContext } from './DataTable.svelte';
 	import { tick } from 'svelte';

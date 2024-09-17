@@ -3,7 +3,7 @@
 	import { initCheckActiveNav } from './Nav.svelte';
 	import { page } from '$app/stores';
 	import { TooltipContent, TooltipTrigger, Tooltip } from '@shadcn-ui/tooltip';
-	import { buttonVariants } from '@shadcn-ui/button';
+	import { buttonVariants } from '@atoms/button';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 

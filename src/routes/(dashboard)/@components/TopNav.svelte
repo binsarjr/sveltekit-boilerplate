@@ -5,7 +5,7 @@
 		DropdownMenuItem,
 		DropdownMenuTrigger
 	} from '@/components/ui/dropdown-menu';
-	import { Button } from '@shadcn-ui/button';
+	import { Button } from '@atoms/button';
 	import IconMenu from '@icons/IconMenu.svelte';
 	import IconChevronDown from '@icons/IconChevronDown.svelte';
 	import { cn } from '@/utils';

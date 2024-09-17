@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Input } from '$lib/components/ui/input';
-	import Button from '$lib/components/ui/button/button.svelte';
+	import Button from '@atoms/button/button.svelte';
 	import DataTableViewOptions from './DataTableViewOptions.svelte';
 	import DataTableFilter from './DataTableFilter.svelte';
 	import { getTableContext, getTableOptionsContext } from './DataTable.svelte';

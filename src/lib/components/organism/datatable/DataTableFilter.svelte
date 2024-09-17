@@ -1,20 +1,19 @@
 <script lang="ts">
-	import { Popover, PopoverTrigger, PopoverContent } from '$lib/components/ui/popover';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { Separator } from '$lib/components/ui/separator';
 	import { Badge } from '$lib/components/ui/badge';
 	import {
 		Command,
-		CommandInput,
-		CommandList,
 		CommandEmpty,
 		CommandGroup,
+		CommandInput,
 		CommandItem,
+		CommandList,
 		CommandSeparator
 	} from '$lib/components/ui/command';
-	import { CheckIcon } from 'lucide-svelte';
+	import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
+	import { Separator } from '$lib/components/ui/separator';
 	import { cn } from '$lib/utils';
-	import type { SvelteComponent } from 'svelte';
+	import { buttonVariants } from '@atoms/button';
+	import { CheckIcon } from 'lucide-svelte';
 
 	export let title: string;
 	export let options: Array<{
@@ -41,7 +40,15 @@
 
 <Popover>
 	<PopoverTrigger>
-		<Button variant="outline" size="sm" class="h-8 border-dashed">
+		<div
+			class={cn(
+				buttonVariants({
+					variant: 'outline',
+					size: 'sm'
+				}),
+				'h-8 border-dashed'
+			)}
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -75,7 +82,7 @@
 					{/if}
 				</div>
 			{/if}
-		</Button>
+		</div>
 	</PopoverTrigger>
 	<PopoverContent class="w-[200px] p-0" align="start">
 		<Command>

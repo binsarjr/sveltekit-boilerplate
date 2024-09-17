@@ -12,7 +12,7 @@
 		DropdownMenuTrigger
 	} from '@shadcn-ui/dropdown-menu';
 	import IconChevronDown from '@icons/IconChevronDown.svelte';
-	import Button from '@shadcn-ui/button/button.svelte';
+	import Button from '@atoms/button/button.svelte';
 
 	const { checkActiveNav } = initCheckActiveNav($page.url.pathname);
 

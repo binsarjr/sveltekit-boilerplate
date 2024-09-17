@@ -23,7 +23,7 @@
 
 	const attrs = {
 		'data-button-root': '',
-		class: cn(buttonVariants({ variant, size, className, fullWidth }))
+		class: cn(buttonVariants({ variant, size, fullWidth }), className)
 	};
 </script>
 

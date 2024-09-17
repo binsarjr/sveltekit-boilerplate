@@ -4,7 +4,7 @@
 	import type { DefaultPlugin } from './DataTable.svelte';
 
 	import { ArrowDown, ArrowUp, ChevronsUpDown, EyeOff } from 'lucide-svelte';
-	import { Button } from '$lib/components/ui/button';
+	import { Button } from '@atoms/button';
 	import {
 		DropdownMenu,
 		DropdownMenuContent,

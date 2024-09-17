@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '@shadcn-ui/button';
+	import { Button } from '@atoms/button';
 	import IconMoon from '@icons/IconMoon.svelte';
 	import IconSun from '@icons/IconSun.svelte';
 	import { onMount } from 'svelte';

@@ -5,7 +5,7 @@
 	import Layout from '@organism/layout/Layout.svelte';
 	import LayoutHeader from '@organism/layout/LayoutHeader.svelte';
 	import LayoutBody from '@organism/layout/LayoutBody.svelte';
-	import { Button } from '@shadcn-ui/button';
+	import { Button } from '@atoms/button';
 	import Search from '@molecules/Search.svelte';
 	import ThemeSwitch from '@molecules/ThemeSwitch.svelte';
 	import TopNav from './@components/TopNav.svelte';
