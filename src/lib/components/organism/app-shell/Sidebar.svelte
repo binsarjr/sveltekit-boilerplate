@@ -19,7 +19,19 @@
 	import Nav from './navigation/Nav.svelte';
 	import IconChevronsLeft from '@icons/IconChevronsLeft.svelte';
 	import { route } from '@/ROUTES';
+	import { UserCircle } from 'lucide-svelte';
 	import { Motion } from 'svelte-motion';
+	import IconUserShield from '@icons/IconUserShield.svelte';
+	import IconUsers from '@icons/IconUsers.svelte';
+	import IconLayoutDashboard from '@icons/IconLayoutDashboard.svelte';
+	import IconChecklist from '@icons/IconChecklist.svelte';
+	import IconMessages from '@icons/IconMessages.svelte';
+	import IconApps from '@icons/IconApps.svelte';
+	import IconComponents from '@icons/IconComponents.svelte';
+	import IconRouteAltLeft from '@icons/IconRouteAltLeft.svelte';
+	import IconChartHistogram from '@icons/IconChartHistogram.svelte';
+	import IconSettings from '@icons/IconSettings.svelte';
+	import IconExclamationCircle from '@icons/IconExclamationCircle.svelte';
 
 	const navCondition = async () => {
 		if (!browser) return;
@@ -39,19 +51,94 @@
 			title: 'Dashboard',
 			label: '',
 			href: route('/'),
-			icon: IconMenu
+			icon: IconLayoutDashboard
 		},
 		{
 			title: 'Tasks',
 			label: '3',
 			href: route('/tasks'),
-			icon: IconMenu
+			icon: IconChecklist
 		},
 		{
-			title: 'Components',
+			title: 'Chats',
+			label: '9',
+			href: '#',
+			icon: IconMessages
+		},
+		{
+			title: 'Apps',
+			label: '',
+			href: '#',
+			icon: IconApps
+		},
+		{
+			title: 'Authentication',
+			label: '',
+			href: '#',
+			icon: IconUserShield,
+			sub: [
+				{
+					title: 'Sign In (email + password)',
+					label: '',
+					href: '#'
+				},
+				{
+					title: 'Sign In (Box)',
+					label: '',
+					href: '#'
+				},
+				{
+					title: 'Sign Up',
+					label: '',
+					href: '#'
+				},
+				{
+					title: 'Forgot Password',
+					label: '',
+					href: '#'
+				},
+				{
+					title: 'OTP',
+					label: '',
+					href: '#'
+				}
+			]
+		},
+		{
+			title: 'Users',
+			label: '',
+			href: '#',
+			icon: IconUsers
+		},
+		{
+			title: 'Requests',
+			label: '10',
+			href: '#',
+			icon: IconRouteAltLeft,
+			sub: [
+				{
+					title: 'Trucks',
+					label: '9',
+					href: '#'
+				},
+				{
+					title: 'Cargos',
+					label: '',
+					href: '#'
+				}
+			]
+		},
+		{
+			title: 'Analysis',
+			label: '',
+			href: '#',
+			icon: IconChartHistogram
+		},
+		{
+			title: 'Extra Components',
 			label: '',
 			href: 'javascript:void(0)',
-			icon: IconMenu,
+			icon: IconComponents,
 			sub: [
 				{
 					title: 'Button',
@@ -62,122 +149,30 @@
 			]
 		},
 		{
-			title: 'Chats',
-			label: '9',
-			href: '#',
-			icon: IconMenu
-		},
-		{
-			title: 'Apps',
-			label: '',
-			href: '#',
-			icon: IconMenu
-		},
-		{
-			title: 'Authentication',
-			label: '',
-			href: '#',
-			icon: IconMenu,
-			sub: [
-				{
-					title: 'Sign In (email + password)',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				},
-				{
-					title: 'Sign In (Box)',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				},
-				{
-					title: 'Sign Up',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				},
-				{
-					title: 'Forgot Password',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				},
-				{
-					title: 'OTP',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				}
-			]
-		},
-		{
-			title: 'Users',
-			label: '',
-			href: '#',
-			icon: IconMenu
-		},
-		{
-			title: 'Requests',
-			label: '10',
-			href: '#',
-			icon: IconMenu,
-			sub: [
-				{
-					title: 'Trucks',
-					label: '9',
-					href: '#',
-					icon: IconMenu
-				},
-				{
-					title: 'Cargos',
-					label: '',
-					href: '#',
-					icon: IconMenu
-				}
-			]
-		},
-		{
-			title: 'Analysis',
-			label: '',
-			href: '#',
-			icon: IconMenu
-		},
-		{
-			title: 'Extra Components',
-			label: '',
-			href: '#',
-			icon: IconMenu
-		},
-		{
 			title: 'Error Pages',
 			label: '',
 			href: '#',
-			icon: IconMenu,
+			icon: IconExclamationCircle,
 			sub: [
 				{
 					title: 'Not Found',
 					label: '',
-					href: route('/error-pages/not-found'),
-					icon: IconMenu
+					href: route('/error-pages/not-found')
 				},
 				{
 					title: 'Internal Server Error',
 					label: '',
-					href: route('/error-pages/internal-error'),
-					icon: IconMenu
+					href: route('/error-pages/internal-error')
 				},
 				{
 					title: 'Maintenance Error',
 					label: '',
-					href: route('/error-pages/maintenance'),
-					icon: IconMenu
+					href: route('/error-pages/maintenance')
 				},
 				{
 					title: 'Unauthorised Error',
 					label: '',
-					href: route('/error-pages/unauthorised'),
-					icon: IconMenu
+					href: route('/error-pages/unauthorised')
 				}
 			]
 		},
@@ -185,7 +180,7 @@
 			title: 'Settings',
 			label: '',
 			href: route('/settings'),
-			icon: IconMenu
+			icon: IconSettings
 		}
 	];
 </script>
