@@ -12,7 +12,20 @@
 	export let isLoading: $$Props['isLoading'] = false;
 </script>
 
-<Button {...$$restProps} disabled={isLoading}>
+<Button
+	{...$$restProps}
+	disabled={isLoading}
+	on:click
+	on:change
+	on:keydown
+	on:keyup
+	on:mouseenter
+	on:mouseleave
+	on:mousedown
+	on:pointerdown
+	on:mouseup
+	on:pointerup
+>
 	{#if isLoading}
 		<span class="mr-2">
 			<Spinner />
