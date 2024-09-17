@@ -17,13 +17,14 @@
 
 	export let variant: $$Props['variant'] = 'default';
 	export let size: $$Props['size'] = 'default';
+	export let radius: $$Props['radius'] = 'default';
 
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 
 	const attrs = {
 		'data-button-root': '',
-		class: cn(buttonVariants({ variant, size, fullWidth }), className)
+		class: cn(buttonVariants({ variant, size, fullWidth, radius }), className)
 	};
 </script>
 
